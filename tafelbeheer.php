@@ -35,6 +35,58 @@ if(!empty($_POST['btn_add']))
 
 }
 
+
+if(!empty($_POST['btn_delete']))
+{
+	try
+	{	
+		$tafel = $_POST['tafelnr'];
+
+		$sql = "DELETE FROM `restoapp`.`tafelbeheer` WHERE `tafelbeheer`.`tafelnummer` = '" . $tafel . "'";
+		$db->conn->query($sql);
+		
+	}
+	
+
+	
+	catch (Exception $e) 
+	{
+		$feedback = $e->getMessage();
+	}
+
+
+}
+
+
+if(!empty($_POST['btn_edit']))
+{
+	try
+	{	
+		$tafel = $_POST['tafelnr'];
+		$pers = $_POST['personen'];
+		$opm = $_POST['opmerkingen'];
+
+		$sql= "UPDATE tafelbeheer SET MaxPersonen = '" . $pers . "', Opmerkingen = '" . $opm . "' WHERE Tafelnummer = '" . $tafel . "'";
+		
+		$db->conn->query($sql);
+
+	}
+	
+
+
+	
+	catch (Exception $e) 
+	{
+		$feedback = $e->getMessage();
+	}
+
+
+}
+
+
+
+
+
 ?>
 
 <!doctype html>
@@ -52,32 +104,30 @@ if(!empty($_POST['btn_add']))
 
 <?php 
 	$conn = new mysqli("localhost","root","root", "restoapp");
-	$sql = "select * from tafelbeheer";
+	$sql = "select * from tafelbeheer order by tafelnummer";
 
 	$result = $conn->query($sql);
 
 	echo "<ul id='tafels'>";
 	foreach ($result as $tafel) 
 	{
-		echo "<li>";
-		echo"<span> Tafelnummer: <input type='text' name='tafelnummer' value='" . 
-		$tafel['Tafelnummer'] . "'/></span>
+		echo "<form action='' method='post'>";
+		echo"<span> Tafelnummer:" . $tafel['Tafelnummer'] . "<input type='hidden' name='tafelnr' value='" .
+		$tafel['Tafelnummer'] ."'/> </span></span>
 		Maximum aantal personen: <input type='text' name='personen' value='" .
 		$tafel['MaxPersonen'] . "'/>
 		Opmerkingen: <input type='text' name='opmerkingen' value='" . 
 		$tafel['Opmerkingen'] . "'/>";
 		
-		echo "<input type='submit' name='btn_bewerk' value='bewerken' />";
+		echo "<input type='submit' name='btn_edit' value='bewerken' />";
 		echo "<input type='submit' name='btn_delete' value='delete' />";
-		echo "</li>";
+		echo "</form>";
+
 	}
 		
 
 ?>
 
-<ul id="tafels">
-
-</ul>
 
 <h1>NIEUWE TAFEL TOEVOEGEN</h1>
 
