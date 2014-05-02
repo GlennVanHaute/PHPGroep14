@@ -4,6 +4,7 @@ include_once('db.php');
 
 class nieuwMenu
 {
+	private $m_iid;
 	private $m_snieuwMenu;	
 	private $m_snieuwMenuDetails;
 	private $m_inieuwMenuPrijs;	
@@ -11,6 +12,10 @@ class nieuwMenu
 	{
 		switch($p_sProperty)
 		{
+			case "id":
+			$this->m_iid = $p_vValue;
+				break;
+
 			case "naam":
 				$this->m_snieuwMenu = $p_vValue;
 				break;
@@ -30,6 +35,10 @@ class nieuwMenu
 		$vResult = null;
 		switch($p_sProperty)
 		{
+			case "id": 
+				$vResult = $this->m_iid;
+				break;
+
 			case "naam": 
 				$vResult = $this->m_snieuwMenu;
 				break;
@@ -48,15 +57,15 @@ class nieuwMenu
 	public function Save()
 	{
 		$db = new Db();
-		$sql = "INSERT INTO nieuwMenu(Naam,Details,prijs) 
+		$sql = "INSERT INTO nieuwMenu(Naam,Details,Prijs) 
 				VALUES (
 					'".	$db->conn->real_escape_string($this->naam)."',
 					'".	$db->conn->real_escape_string($this->details)."',
-					'".	$db->conn->real_escape_string($this->prijs)."'
-					)";	
-		$db->conn->query($sql);
+					'".	$db->conn->real_escape_string($this->prijs)."')";		
 		
-		//print_r($sql);
+		
+		return $db->conn->query($sql);
+		print_r($sql);
 	}
 
 	public function getAll()
@@ -67,13 +76,37 @@ class nieuwMenu
     	return $db->conn->query($sql);
 	}
 
-	public function getGerecht()
+	public function Update()
 	{
-
 		$db = new Db();
-		$sql = "select * from nieuwMenu where Naam =";
-    	return $db->conn->query($sql);
+		// UPDATE `nieuwMenu` 
+		// SET 
+		// `Naam`=[value-2],
+		// `Details`=[value-3],
+		// `Prijs`=[value-4] WHERE 
+		// 'id'=
+
+		$sql = "UPDATE nieuwMenu 
+				SET (
+					Naam = '".$db->conn->real_escape_string($this->naam)."',
+					Details = '".$db->conn->real_escape_string($this->details)."',
+					Prijs = '".$db->conn->real_escape_string($this->prijs)."') 
+					WHERE id = '".$this->id."'";	
+
+		$db->conn->query($sql);
+		print_r($sql);
+
 	}
+
+	public function Delete()
+	{
+		$db = new Db();
+		$sql = "DELETE FROM nieuwMenu
+				WHERE id = '".$this->id."'
+				";
+		$db->conn->query($sql);
+	}
+	
 }
 
 
