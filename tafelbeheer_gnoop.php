@@ -1,77 +1,93 @@
 <?php include_once('classes/db.php') ?>
-<?php //include_once('classes/Tafel.class.php') ?>
 
-<?php
+<?php 
 
-$nieuwtafel = new Tafel();
+$db = new Db();
 
- NIEUWE TAFEL AANMAKEN
 if(!empty($_POST['btn_add']))
 {
-	try 
+	try
 	{
+		$nr = $_POST['tafelnr'];
+		$pers = $_POST['personen'];
 		
-		$nieuwtafel->nummer = $_POST['tafelnr'];
-		$nieuwtafel->personen = $_POST['personen'];
 		if (!empty($_POST['opm'])) 
 		{
-			$nieuwtafel->opm = $_POST['opm'];
+			$opm = $_POST['opm'];
 		}
 		else 
 		{
 			$opm =" ";
 		}
+
+			$sql = "INSERT INTO tafelbeheer (Tafelnummer, MaxPersonen, Opmerkingen) VALUES ('$nr', '$pers', '$opm')";
+			$db->conn->query($sql);
 		
-		$nieuwtafel->Save();
+	}
+	
+
+	
+	catch (Exception $e) 
+	{
+		$feedback = $e->getMessage();
 	}
 
-	catch (Exception $e) 
-		{
-			$feedback = $e->getMessage();
-		}	
+
 }
 
-// TAFEL DELETEN
+
 if(!empty($_POST['btn_delete']))
-	{
-		try
-		{	
-			$deltafel->nummer = $_POST['tafelnr'];
-			$deltafel->Delete();
-		}
+{
+	try
+	{	
+		$tafel = $_POST['tafelnr'];
+
+		$sql = "DELETE FROM `restoapp`.`tafelbeheer` WHERE `tafelbeheer`.`tafelnummer` = '" . $tafel . "'";
+		$db->conn->query($sql);
+		
+	}
 	
-		catch (Exception $e) 
-		{
-			$feedback = $e->getMessage();
-		}
 
-	}
-
-// TAFEL BEWERKEN, tafelnr uit invisible
-	if(!empty($_POST['btn_edit']))
+	
+	catch (Exception $e) 
 	{
-		try
-		{	
-			$nieuwMenu->nummer = $_POST['tafelnr'];
-			$nieuwMenu->personen = $_POST['personen'];
-			$nieuwMenu->opm = $_POST['opmerkingen'];
-			$nieuwMenu->Edit();
-
-		}
-		catch (Exception $e) 
-		{
-			$feedback = $e->getMessage();
-		}
+		$feedback = $e->getMessage();
 	}
+
+
+}
+
+
+if(!empty($_POST['btn_edit']))
+{
+	try
+	{	
+		$tafel = $_POST['tafelnr'];
+		$pers = $_POST['personen'];
+		$opm = $_POST['opmerkingen'];
+
+		$sql= "UPDATE tafelbeheer SET MaxPersonen = '" . $pers . "', Opmerkingen = '" . $opm . "' WHERE Tafelnummer = '" . $tafel . "'";
+		
+		$db->conn->query($sql);
+
+	}
+	
+
+
+	
+	catch (Exception $e) 
+	{
+		$feedback = $e->getMessage();
+	}
+
+
+}
+
+
+
 
 
 ?>
-
-
-
-
-
-
 
 <!doctype html>
 <html lang="en">
@@ -85,8 +101,8 @@ if(!empty($_POST['btn_delete']))
 <body>
 
 <h1>BESTAANDE TAFELS BEHEREN</h1>
+
 <?php 
-	echo "$feedback";
 	$conn = new mysqli("localhost","root","root", "restoapp");
 	$sql = "select * from tafelbeheer order by tafelnummer";
 
