@@ -87,10 +87,10 @@ class nieuwMenu
 		// 'id'=
 
 		$sql = "UPDATE nieuwMenu 
-				SET (
+				SET 
 					Naam = '".$db->conn->real_escape_string($this->naam)."',
 					Details = '".$db->conn->real_escape_string($this->details)."',
-					Prijs = '".$db->conn->real_escape_string($this->prijs)."') 
+					Prijs = '".$db->conn->real_escape_string($this->prijs)."'
 					WHERE id = '".$this->id."'";	
 
 		$db->conn->query($sql);

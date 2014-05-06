@@ -56,7 +56,7 @@
 	<title>Menu</title>
 </head>
 <body>
-	<h1>Nieuw gerecht aanmake</h1>
+	<h1>Nieuw gerecht aanmaken</h1>
 
 	<form action="" method="POST">
 
