@@ -106,6 +106,39 @@ class nieuwMenu
 				";
 		$db->conn->query($sql);
 	}
+
+	public function Check()
+		{
+			$db = new db();
+			$sql = "SELECT * FROM nieuwMenu WHERE Naam = '".$this->naam."';";
+			$result = $db->conn->query($sql);
+			//print_r($sql);
+
+			//print_r($result);
+
+			if($result)
+			{
+				if(mysqli_num_rows($result) === 0)
+				{
+					$available = true;
+					
+				}
+				else
+				{
+					$available = false;
+	
+				}
+			}
+			else
+			{
+				$available = false;
+				$this->errors['errorDB'] = "Er is geen connectie met de databank.";
+			}
+
+			return $available;
+
+
+		}
 	
 }
 

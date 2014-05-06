@@ -53,10 +53,46 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#nieuwMenu").on('keyup', function(){
+			var gerecht = $("#nieuwMenu").val();
+			//console.log(gerecht);
+
+			$.ajax
+				({
+				  type: "POST",
+				  url: "ajax/ajax.menu.php",
+				  data: { nieuwMenu: gerecht }
+				})
+				.done(function(result) 
+				{
+					console.log(result);
+					if(result == 'false')
+					{
+						$(".status").show('slow');
+						$(".status").html("<p>Dit gerecht bestaat al!</p>");
+					}
+					else
+					{
+						$(".status").hide('slow');
+					}
+					
+			    });
+
+			return(false);
+		});
+	});
+
+	</script>
 	<title>Menu</title>
 </head>
 <body>
 	<h1>Nieuw gerecht aanmaken</h1>
+
+	<div class="status"></div>
 
 	<form action="" method="POST">
 
