@@ -8,6 +8,7 @@ class nieuwMenu
 	private $m_snieuwMenu;	
 	private $m_snieuwMenuDetails;
 	private $m_inieuwMenuPrijs;	
+	
 	public function __set($p_sProperty, $p_vValue)
 	{
 		switch($p_sProperty)

@@ -1,11 +1,13 @@
-<?php include_once('classes/db.php') ?>
-<?php //include_once('classes/Tafel.class.php') ?>
-
 <?php
+
+include_once('classes/db.php');
+include_once('classes/Tafel.class.php');
 
 $nieuwtafel = new Tafel();
 
- NIEUWE TAFEL AANMAKEN
+$feedback = '';
+
+//NIEUWE TAFEL AANMAKEN
 if(!empty($_POST['btn_add']))
 {
 	try 
@@ -48,14 +50,15 @@ if(!empty($_POST['btn_delete']))
 	}
 
 // TAFEL BEWERKEN, tafelnr uit invisible
+
 	if(!empty($_POST['btn_edit']))
 	{
 		try
 		{	
-			$nieuwMenu->nummer = $_POST['tafelnr'];
-			$nieuwMenu->personen = $_POST['personen'];
-			$nieuwMenu->opm = $_POST['opmerkingen'];
-			$nieuwMenu->Edit();
+			$nieuwtafel->nummer = $_POST['tafelnr'];
+			$nieuwtafel->personen = $_POST['personen'];
+			$nieuwtafel->opm = $_POST['opmerkingen'];
+			$nieuwtafel->Edit();
 
 		}
 		catch (Exception $e) 
@@ -65,38 +68,28 @@ if(!empty($_POST['btn_delete']))
 	}
 
 
-?>
-
-
-
-
-
-
-
-<!doctype html>
+?><!doctype html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>Tafelbeheer (backend)</title>
 		<link rel="stylesheet" href="css/style.css">
-
 	
 </head>
 <body>
 
-<h1>BESTAANDE TAFELS BEHEREN</h1>
+<h1>BESTAANDE TAFELS BEHERE</h1>
 <?php 
-	echo "$feedback";
-	$conn = new mysqli("localhost","root","root", "restoapp");
-	$sql = "select * from tafelbeheer order by tafelnummer";
+	echo $feedback;
 
-	$result = $conn->query($sql);
+	$result = $nieuwtafel->GetAll();
 
 	echo "<ul id='tafels'>";
-	foreach ($result as $tafel) 
+
+	while($tafel = $result->fetch_assoc()) 
 	{
 		echo "<form action='' method='post'>";
-		echo"<span> Tafelnummer:" . $tafel['Tafelnummer'] . "<input type='hidden' name='tafelnr' value='" .
+		echo "<span> Tafelnummer: " . $tafel['Tafelnummer'] . "<input type='hidden' name='tafelnr' value='" .
 		$tafel['Tafelnummer'] ."'/> </span></span>
 		Maximum aantal personen: <input type='text' name='personen' value='" .
 		$tafel['MaxPersonen'] . "'/>

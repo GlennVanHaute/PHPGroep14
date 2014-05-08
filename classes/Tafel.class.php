@@ -1,18 +1,25 @@
 
-<?phpinclude_once('db.php');?>
-
 <?php
+
+include_once('db.php');
+
 class Tafel
 {
+	private $m_iid;
 	private $m_sNummer; 	//s ipv i want cijfers en/of letters	
 	private $m_iPersonen;
 	private $m_sOpmerkingen;	
+
 	public function __set($p_sProperty, $p_vValue)
 	{
 		switch($p_sProperty)
 		{
+			case "id":
+				$this->m_iid = $p_vValue;
+				break;
+
 			case "nummer":
-			$this->m_sNummer = $p_vValue;
+				$this->m_sNummer = $p_vValue;
 				break;
 
 			case "personen":
@@ -20,7 +27,7 @@ class Tafel
 				break;
 
 			case "opm":
-				$this->m_snieuwMenuDetails = $p_vValue;
+				$this->m_sOpmerkingen = $p_vValue;
 				break;
 		}	   
 	}
@@ -30,7 +37,11 @@ class Tafel
 		$vResult = null;
 		switch($p_sProperty)
 		{
-			case "tafelnr": 
+			case "id": 
+				$vResult = $this->m_iid;
+				break;
+
+			case "nummer": 
 				$vResult = $this->m_sNummer;
 				break;
 
@@ -39,7 +50,7 @@ class Tafel
 				break;
 
 			case "opm": 
-				$vResult = $this->m_snieuwMenuDetails;
+				$vResult = $this->m_sOpmerkingen;
 				break;
 		}
 		return $vResult;
@@ -49,32 +60,26 @@ class Tafel
 	{
 		$db = new Db();
 		$sql = "INSERT INTO tafelbeheer (Tafelnummer, MaxPersonen, Opmerkingen) 
-		VALUES ('".	$db->conn->real_escape_string($this->tafelnr)."',
-					'".	$db->conn->real_escape_string($this->personen)."',
-					'".	$db->conn->real_escape_string($this->opm)."')";
+		VALUES (
+			'".	$db->conn->real_escape_string($this->nummer)."',
+			'".	$db->conn->real_escape_string($this->personen)."',
+			'".	$db->conn->real_escape_string($this->opm)."')";
+
 		return $db->conn->query($sql);
-		
 	}
-	
-
-	
-	catch (Exception $e) 
-	{
-		$feedback = $e->getMessage();
-	}
-
 
 	public function Edit()
 	{
 		$db = new Db();
-		$sql = "UPDATE nieuwMenu 
-				SET (
-					Naam = '".$db->conn->real_escape_string($this->naam)."',
-					Details = '".$db->conn->real_escape_string($this->details)."',
-					Prijs = '".$db->conn->real_escape_string($this->prijs)."') 
+		$sql = "UPDATE tafelbeheer
+				SET 
+					nummer = '".$db->conn->real_escape_string($this->nummer)."',
+					personen = '".$db->conn->real_escape_string($this->personen)."',
+					opm = '".$db->conn->real_escape_string($this->opm)."'
 					WHERE id = '".$this->id."'";	
 
 		return $db->conn->query($sql);
+		print_r($sql);
 
 	}
 
@@ -85,6 +90,13 @@ class Tafel
 				WHERE `tafelbeheer`.`tafelnummer` = '".$this->nummer."'
 				";
 		return $db->conn->query($sql);
+	}
+
+	public function GetAll()
+	{
+		$db = new Db();
+		$sql = "select * from tafelbeheer order by tafelnummer";
+    	return $db->conn->query($sql);
 	}
 	
 }
