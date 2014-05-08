@@ -1,4 +1,7 @@
 <?php 
+
+	$reservatienr = $_POST['res'];
+
 	if(!empty($_POST))
 		{
 			include_once("classes/reservatie.class.php");
@@ -10,7 +13,6 @@
 				$reservatie->Datum = $_POST['datum'];
 				$reservatie->Tijdstip = $_POST['tijdstip'];
 				$reservatie->Save();
-				
 
 			}
 			
