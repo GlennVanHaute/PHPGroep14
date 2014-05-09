@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: May 08, 2014 at 10:12 PM
+-- Generation Time: May 09, 2014 at 01:49 PM
 -- Server version: 5.5.34
 -- PHP Version: 5.5.10
 
@@ -27,9 +27,17 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `reservatie` (
-  `Tafelnummer` int(11) NOT NULL,
-  `Datum` int(11) NOT NULL
+  `Tafelnummer` varchar(11) NOT NULL,
+  `Datum` date NOT NULL,
+  `Uur` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `reservatie`
+--
+
+INSERT INTO `reservatie` (`Tafelnummer`, `Datum`, `Uur`) VALUES
+('1', '2014-10-20', NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
