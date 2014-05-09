@@ -33,13 +33,13 @@
 	  		
 			while($lijstmenu = $res->fetch_assoc())
 			{
-				echo "<form>";
+				//echo "<form>";
 				//echo "<input type='hidden' name='gerechtid' value='".$lijstmenu['id']."'/>";
-				echo "<input class='target' type='checkbox' value='".$lijstmenu['Naam']."'/>"." ".$lijstmenu['Naam'];
+				echo "<h2>".$lijstmenu['Naam']."</h2>";
 				echo "<p>".$lijstmenu['Details']."</p>";
 				echo "<p>€ ".$lijstmenu['Prijs']."</p>";
 				echo "</br>";
-				echo "</form>";
+				//echo "</form>";
 			}
 			
 

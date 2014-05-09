@@ -73,21 +73,22 @@ class Tafel
 		$db = new Db();
 		$sql = "UPDATE tafelbeheer
 				SET 
-					nummer = '".$db->conn->real_escape_string($this->nummer)."',
-					personen = '".$db->conn->real_escape_string($this->personen)."',
-					opm = '".$db->conn->real_escape_string($this->opm)."'
-					WHERE id = '".$this->id."'";	
+					Tafelnummer = '".$db->conn->real_escape_string($this->nummer)."',
+					MaxPersonen = '".$db->conn->real_escape_string($this->personen)."',
+					Opmerkingen = '".$db->conn->real_escape_string($this->opm)."'
+					WHERE Tafelnummer = '".$this->nummer."'";	
 
-		return $db->conn->query($sql);
-		print_r($sql);
+					print_r($sql);
 
+		$db->conn->query($sql);
+		
 	}
 
 	public function Delete()
 	{
 		$db = new Db();
-		$sql = "DELETE FROM 'restoapp'.'tafelbeheer'
-				WHERE `tafelbeheer`.`tafelnummer` = '".$this->nummer."'
+		$sql = "DELETE FROM tafelbeheer
+				WHERE Tafelnummer = '".$this->nummer."'
 				";
 		return $db->conn->query($sql);
 	}
@@ -95,7 +96,7 @@ class Tafel
 	public function GetAll()
 	{
 		$db = new Db();
-		$sql = "select * from tafelbeheer order by tafelnummer";
+		$sql = "select * from tafelbeheer order by Tafelnummer";
     	return $db->conn->query($sql);
 	}
 	

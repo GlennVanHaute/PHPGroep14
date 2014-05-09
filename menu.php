@@ -121,7 +121,6 @@
 		while($lijstmenu = $res->fetch_assoc())
 		{
 			echo "<form action='' method='post'>";
-
 			echo "<li>";
 			echo "<input type='hidden' name='gerechtid' value='".$lijstmenu['id']."'/>";
 			echo "<label for='gerechtnaam'>Naam: </label>";
