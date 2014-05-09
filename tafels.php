@@ -7,6 +7,7 @@
 
 		$aantal = $_POST['aantal'];
 		$datum = $_POST['datum'];
+		$datum = $_POST['uur'];
 
 		$sql = "select * from tafelbeheer where MaxPersonen='" . $aantal . "' order by Tafelnummer";
 
@@ -24,18 +25,25 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Tafels (frontend)</title>
+	<title>Reservatie</title>
 </head>
 <body>
 
-<h1>TAFELS</h1>
+		<?php include_once('classes/nav_include.php') ?>
+
+
+<h1>RESERVATIE</h1>
+<p>Reserveer hier uw tafel</p>
 
 <form action="" method="post">
 
-<label for="datum">Op welke datum wilt u een tafel reserveren?</labe>
+<label for="datum">Datum:</label>
 <input type="date" for="datum>" name="datum"/>
 
-<label for="aantal">Voor hoeveel personen wilt u een tafel reserveren?</label>
+<label for="uur">Uur:</label>
+<input type="time" for="uur>" name="uur"/>
+
+<label for="aantal">Aantal personen:</label>
 <select name="aantal">
   <option value="1">1</option>
   <option value="2">2</option>
@@ -74,7 +82,6 @@
 			$sql3 = "select * from reservatie where Tafelnummer='" . $tafelnr . "' and Datum ='" . $datum . "'";
 			$check3 = mysqli_query($db->conn,$sql3);
 
-			echo "$sql3";
 
 			if(mysqli_num_rows($check3) == 0)
 			{
@@ -82,7 +89,7 @@
 				echo"<span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
 				Maximum aantal personen: " . 		$tafel['MaxPersonen'] . "
 				Opmerkingen: " . 		$tafel['Opmerkingen'];
-				echo"<button><a href='reservatie.php?res=" . $tafel['Tafelnummer'] . "'> Deze tafel reserveren</a></button>";
+				echo"<button>Deze tafel reserveren</button>";
 				echo "</li>";
 			}
 		}
@@ -105,7 +112,7 @@
 				echo"<span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
 				Maximum aantal personen: " . 		$tafel['MaxPersonen'] . "
 				Opmerkingen: " . 		$tafel['Opmerkingen'];
-				echo"<button><a href='reservatie.php?res=" . $tafel['Tafelnummer'] . "'> Deze tafel reserveren</a></button>";
+				echo"<button>Deze tafel reserveren</button>";
 				echo "</li>";
 			}
 		}
@@ -138,6 +145,13 @@ if (empty($_POST))
 }
 ?>
 </ul>
+
+<section id="reservatiebevestiging">
+
+<?php include('reservatie.php') ?>
+//seservatie moet $tafelr $datum $uur pakken en in reservatie steken.
+
+</section>
 
 	
 </body>
