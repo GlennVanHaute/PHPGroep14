@@ -1,4 +1,4 @@
-<?php include_once('classes/db.php') ?>
+<?php include_once('classes/db.php')?>
 <?php $db = new Db(); ?>
 
 <?php
@@ -9,9 +9,6 @@
 		$datum = $_POST['datum'];
 
 		$sql = "select * from tafelbeheer where MaxPersonen='" . $aantal . "' order by Tafelnummer";
-
-		$sqlreserveer = "select * from reservatie where Tafelnummer='" /*TAFELNUMMER*/ . "' and Gereserveerd !=" . $datum . "'"
-		// als dit klopt, dan pas tafels laten zien!!
 
 		$result = $db->conn->query($sql);
 		$check = mysqli_query($db->conn,$sql);
@@ -56,7 +53,7 @@
 
 </form>
 
-<?php 
+<?php
 	if (!empty($_POST)) 
 	{
 
@@ -73,12 +70,21 @@
 
 		foreach ($result as $tafel) 
 		{
-			echo "<li>";
-			echo"<span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
-			Maximum aantal personen: " . 		$tafel['MaxPersonen'] . "
-			Opmerkingen: " . 		$tafel['Opmerkingen'];
-			echo"<button href='reservatie.php?res=" . $tafel['Tafelnummer'] . "'> Deze tafel reserveren</button>";
-			echo "</li>";
+			$tafelnr = $tafel['Tafelnummer'];
+			$sql3 = "select * from reservatie where Tafelnummer='" . $tafelnr . "' and Datum ='" . $datum . "'";
+			$check3 = mysqli_query($db->conn,$sql3);
+
+			echo "$sql3";
+
+			if(mysqli_num_rows($check3) == 0)
+			{
+				echo "<li>";
+				echo"<span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
+				Maximum aantal personen: " . 		$tafel['MaxPersonen'] . "
+				Opmerkingen: " . 		$tafel['Opmerkingen'];
+				echo"<button><a href='reservatie.php?res=" . $tafel['Tafelnummer'] . "'> Deze tafel reserveren</a></button>";
+				echo "</li>";
+			}
 		}
 
 		
@@ -88,14 +94,22 @@
 
 			foreach ($result2 as $tafel) 
 		{
-			echo "<li>";
-			echo"<span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
-			Maximum aantal personen: " . 		$tafel['MaxPersonen'] . "
-			Opmerkingen: " . 		$tafel['Opmerkingen'];
-			echo"<button><a href='reservatie.php?res=" . $tafel['Tafelnummer'] . "'> Deze tafel reserveren</a></button>";
-			echo "</li>";
+
+			$tafelnr = $tafel['Tafelnummer'];
+			$sql3 = "select * from reservatie where Tafelnummer='" . $tafelnr . "' and Datum ='" . $datum . "'";
+			$check3 = mysqli_query($db->conn,$sql3);
+
+			if(mysqli_num_rows($check3) == 0)
+			{
+				echo "<li>";
+				echo"<span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
+				Maximum aantal personen: " . 		$tafel['MaxPersonen'] . "
+				Opmerkingen: " . 		$tafel['Opmerkingen'];
+				echo"<button><a href='reservatie.php?res=" . $tafel['Tafelnummer'] . "'> Deze tafel reserveren</a></button>";
+				echo "</li>";
+			}
 		}
-		}
+	}
 
 		
 	}
@@ -104,7 +118,7 @@
 
 <ul id='tafels'>
 
-<?php 
+<?php
 
 if (empty($_POST)) 
 {
