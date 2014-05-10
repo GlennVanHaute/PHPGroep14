@@ -1,24 +1,23 @@
 <?php 
 
 	include_once('classes/db.php');
-	$db = new Db();
+	include_once('classes/Tafel.class.php');
+	include_once('classes/reservatie.class.php');
 
+	$db = new Db();
+	$Reservatie = new Reservatie();
+	$Tafel = new Tafel();
 
 	if (!empty($_POST)) 
 	{
 
-		$aantal = $_POST['aantal'];
-		$datum = $_POST['datum'];
-		$datum = $_POST['uur'];
+		$Tafel->personen = $_POST['aantal'];
+		$Reservatie->Datum = $_POST['datum'];
+		$Reservatie->Uur = $_POST['uur'];
+		$resultTafel = $Tafel->CheckAantal();
 
-		$sql = "select * from tafelbeheer where MaxPersonen='" . $aantal . "' order by Tafelnummer";
-
-		$result = $db->conn->query($sql);
-		$check = mysqli_query($db->conn,$sql);
-
-		$sql2 = "select * from tafelbeheer where MaxPersonen>'" . $aantal .  "' order by Tafelnummer";
-		$result2 = $db->conn->query($sql2);
-		$check2 = mysqli_query($db->conn,$sql2);
+		$Tafel->personen = $_POST['aantal'];
+		$resultTafelHoger = $Tafel->CheckAantalHoger();
 	}
 
 ?>
@@ -85,29 +84,27 @@
 	if (!empty($_POST)) 
 	{
 
-		echo "<h2> Tafels van " . $aantal . " personen:</h2>";
+		echo "<h2> Tafels van " . $_POST['aantal'] . " personen:</h2>";
 
 		
-		if(mysqli_num_rows($check) ==0 && mysqli_num_rows($check2)== 0)
+		if(mysqli_num_rows($resultTafel) ==0 /*&& mysqli_num_rows($check2)== 0*/)
 		{
-			echo "<p>Er zijn geen tafels voor " .$aantal. " personen. U kan wel meerdere kleine tafels reserveren.";
+			echo "<p>Er zijn geen tafels voor " .$Tafel->personen. " personen. U kan wel meerdere kleine tafels reserveren.";
 		}
-		else if(mysqli_num_rows($check) == 0)
+		else if(mysqli_num_rows($resultTafel) == 0)
 		{
-			echo "<p> Er is geen tafel vrij voor exact " . $aantal . " personen.
-			Kijk hieronder voor andere reserveerbare tafels voor meer dan " . $aantal . " personen</p>";
+			echo "<p> Er is geen tafel vrij voor exact " . $Tafel->personen . " personen.
+			Kijk hieronder voor andere reserveerbare tafels voor meer dan " . $Tafel->personen . " personen</p>";
 		}
 
 
 
-		foreach ($result as $tafel) 
+		foreach ($resultTafel as $tafel) 
 		{
-			$tafelnr = $tafel['Tafelnummer'];
-			$sql3 = "select * from reservatie where Tafelnummer='" . $tafelnr . "' and Datum ='" . $datum . "'";
-			$check3 = mysqli_query($db->conn,$sql3);
+			$Reservatie->Tafelnummer = $tafel['Tafelnummer'];
+			$resultDatum = $Reservatie->CheckDatum();
 
-
-			if(mysqli_num_rows($check3) == 0)
+			if(mysqli_num_rows($resultDatum) == 0)
 			{
 				echo "<li class='huidigeres'>";
 				echo" <span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
@@ -120,18 +117,16 @@
 		}
 
 		
-		if(mysqli_num_rows($check2) != 0)
+		if(mysqli_num_rows($resultTafelHoger) != 0)
 		{
 			echo "<h2> Tafels die u ook kan reserveren:</h2>";
 
-			foreach ($result2 as $tafel) 
+			foreach ($resultTafel as $tafel) 
 			{
+				$Reservatie->Tafelnummer = $tafel['Tafelnummer'];
+				$resultDatum = $Reservatie->CheckDatum();
 
-			$tafelnr = $tafel['Tafelnummer'];
-			$sql3 = "select * from reservatie where Tafelnummer='" . $tafelnr . "' and Datum ='" . $datum . "'";
-			$check3 = mysqli_query($db->conn,$sql3);
-
-				if(mysqli_num_rows($check3) == 0)
+				if(mysqli_num_rows($resultDatum) == 0)
 				{
 					echo "<li class='huidigeres'>";
 					echo"<span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>

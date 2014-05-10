@@ -99,6 +99,23 @@ class Tafel
 		$sql = "select * from tafelbeheer order by Tafelnummer";
     	return $db->conn->query($sql);
 	}
+
+	public function CheckAantal()
+	{
+		$db = new Db();
+		$sql = "select * from tafelbeheer where MaxPersonen ='" . $this->personen . "' order by Tafelnummer;";
+		return $result = $db->conn->query($sql);
+
+		 //$check = mysqli_query($db->conn,$sql);
+	}
+
+	public function CheckAantalHoger()
+	{
+		$db = new db();
+		$sql = "select * from tafelbeheer where MaxPersonen >'" . $this->personen . "' order by Tafelnummer;";
+		return $db->conn->query($sql);
+	}
+
 	
 }
 
