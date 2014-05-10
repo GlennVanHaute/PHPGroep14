@@ -38,8 +38,8 @@ if(!empty($_POST['btn_delete']))
 	{
 		try
 		{	
-			$deltafel->nummer = $_POST['tafelnr'];
-			$deltafel->Delete();
+			$nieuwtafel->nummer = $_POST['tafelnr'];
+			$nieuwtafel->Delete();
 		}
 	
 		catch (Exception $e) 
@@ -55,11 +55,11 @@ if(!empty($_POST['btn_delete']))
 	{
 		try
 		{	
+			$nieuwtafel->id = $_POST['tafelnr'];
 			$nieuwtafel->nummer = $_POST['tafelnr'];
 			$nieuwtafel->personen = $_POST['personen'];
 			$nieuwtafel->opm = $_POST['opmerkingen'];
 			$nieuwtafel->Edit();
-
 		}
 		catch (Exception $e) 
 		{
@@ -78,7 +78,7 @@ if(!empty($_POST['btn_delete']))
 </head>
 <body>
 
-<h1>BESTAANDE TAFELS BEHERE</h1>
+<h1>BESTAANDE TAFELS BEHEREN</h1>
 <?php 
 	echo $feedback;
 

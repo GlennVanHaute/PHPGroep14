@@ -1,7 +1,5 @@
 <?php 
 
-	$reservatienr = $_POST['res'];
-
 	if(!empty($_POST))
 		{
 			include_once("classes/reservatie.class.php");
@@ -27,21 +25,10 @@
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
 	<link rel="stylesheet" href="css/style_reservatie.css">
-	<title>Reserveer een tafel hier!</title>
+	<title>Reservatiebevestiging</title>
 </head>
-<body>
-<nav class="nav-sidebar">
-                <ul class="nav">
-                    <li class="active"><a href="javascript:;">Home</a></li>
-                    <li><a href="javascript:;">About</a></li>
-                    <li><a href="javascript:;">Products</a></li>
-                    <li><a href="javascript:;">FAQ</a></li>
-                    <li class="nav-divider"></li>
-                    <li><a href="javascript:;"><i class="glyphicon glyphicon-off"></i> Sign in</a></li>
-                </ul>
-            </nav>
-			
-			    <h2>Reservatieformulier</h2>
+<body>			
+			    <h1>Reservatiebevestiging</h2>
 <div class="container-fluid">
 
 	<div class="row">
