@@ -1,4 +1,5 @@
 <?php 
+
 include("classes/User.class.php");
 if (isset($_POST['btnSignup'])) {
 	try{
@@ -31,6 +32,15 @@ if (isset($_POST['btnLogin'])) {
 	<link rel="stylesheet" href="style.css" media="all">
 </head>
 <body>
+	<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=315743638578786&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="container">
 	<nav>
 		<a href="logout.php"Logout>Logout</a>
 	</nav>
@@ -65,7 +75,9 @@ if (isset($_POST['btnLogin'])) {
 		 
 		 ?></div>
 	</section>
+		<div class="row"><div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true"></div></div>
 	</div>	
-	
+
+</div>
 </body>
 </html>
