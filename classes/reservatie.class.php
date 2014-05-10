@@ -6,8 +6,10 @@ include_once ("db.php");
 		{
 			private $m_iTafelnummer;
 			private $m_sDatum;
-			private $m_sUur;
+			private $m_sBeginuur;
+			private $m_sEinduur;
 			
+
 
 			public function __set($p_sProperty,$p_vValue)
 			{
@@ -21,8 +23,12 @@ include_once ("db.php");
 						$this->m_sDatum = $p_vValue;
 						break;
 
-					case 'Uur':
-						$this->m_sTijdstip = $p_vValue;
+					case 'Beginuur':
+						$this->m_sBeginuur = $p_vValue;
+						break;
+
+					case 'Einduur':
+						$this->m_sEinduur = $p_vValue;
 						break;
 				}
 
@@ -41,8 +47,12 @@ include_once ("db.php");
 						return $this->m_sDatum;
 						break;
 
-					case 'Uur':
-						return $this->m_sTijdstip;
+					case 'Beginuur':
+						return $this->m_sBeginuur;
+						break;
+
+					case 'Einduur':
+						return $this->m_sEinduur;
 						break;
 				}
 			}
@@ -53,6 +63,27 @@ include_once ("db.php");
 				$db = new db();
 				$sql = "select * from reservatie where Tafelnummer='" . $this->Tafelnummer . "' and Datum ='" . $this->Datum . "';";
 				return $db->conn->query($sql);
+
+			}
+
+			public function Reserveer()
+			{
+				echo "check functie Reserveer <br/>";
+				echo "nummer: $this->Tafelnummer  <br/>";
+				echo "datum: $this->Datum  <br/>";
+				echo "beginuur: $this->Beginuur  <br/>";
+				echo "beginuur2: $this->Einduur  <br/>";
+
+				$db = new db();
+				$sql = "INSERT INTO reservatie (Tafelnummer, Beginuur, Einduur) 
+				VALUES (
+			'".	$db->conn->real_escape_string($this->Tafelnummer)."',
+			'".	$db->conn->real_escape_string($this->Datum)."',
+			'".	$db->conn->real_escape_string($this->Beginuur)."',
+			'".	$db->conn->real_escape_string($this->Einduur)."')";
+				return $db->conn->query($sql);
+
+				echo "$sql";
 
 			}
 

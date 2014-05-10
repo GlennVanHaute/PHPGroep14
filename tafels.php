@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	include_once('classes/db.php');
 	include_once('classes/Tafel.class.php');
@@ -10,14 +10,28 @@
 
 	if (!empty($_POST)) 
 	{
+		$aantal = $_POST['aantal'];
+		$datum = $_POST['datum'];
+		$startuur = $_POST['uur'];
 
 		$Tafel->personen = $_POST['aantal'];
-		$Reservatie->Datum = $_POST['datum'];
-		$Reservatie->Uur = $_POST['uur'];
 		$resultTafel = $Tafel->CheckAantal();
 
 		$Tafel->personen = $_POST['aantal'];
-		$resultTafelHoger = $Tafel->CheckAantalHoger();
+		$resultTafelHoger = $Tafel->CheckAantalHoger($aantal);
+
+	}
+
+	if (!empty($_POST['ressubmit'])) 
+	{
+		$Reservatie->Tafelnummer = $_POST['restafel'];
+		$Reservatie->Datum = $_POST['resdatum'];
+		$Reservatie->Beginuur = $_POST['resuur'];
+		$Reservatie->Einduur = $_POST['resuur'];
+
+		$Reservatie->Reserveer();
+
+
 	}
 
 ?>
@@ -28,7 +42,7 @@
 	
 	<meta charset="UTF-8">
 	<title>Reservatie</title>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script>
 		$(document).ready(function(){
 			$("#resbevtitel").hide();
@@ -43,7 +57,7 @@
 				$("#reserveer").hide('slow');
 			});
 		});
-	</script>
+	</script>-->
 </head>
 <body>
 
@@ -51,7 +65,7 @@
 
 
 <h1>RESERVATIE</h1>
-<p>Reserveer hier uw tafel</p>
+<p>Kijk hier of er beschikbare tafels zijn:</p>
 
 <form action="" method="post">
 
@@ -75,19 +89,20 @@
   <option value="10">10</option>
 </select>
 
-<input type="submit" value="zoeken"/>
+<input type="submit"  name='submitknop' value="zoeken"/>
 
 </form>
 
 <section id='reserveer'>
-<?php
-	if (!empty($_POST)) 
+<?php 
+	if (!empty($_POST['submitknop'])) 
 	{
 
-		echo "<h2> Tafels van " . $_POST['aantal'] . " personen:</h2>";
+		echo "<h2> Reserveerbare tafels van " . $_POST['aantal'] . " personen op " . $_POST['datum'] . ":</h2>";
 
 		
-		if(mysqli_num_rows($resultTafel) ==0 /*&& mysqli_num_rows($check2)== 0*/)
+		if(mysqli_num_rows($resultTafel) ==0 )
+			//&& mysqli_num_rows($check2)== 0
 		{
 			echo "<p>Er zijn geen tafels voor " .$Tafel->personen. " personen. U kan wel meerdere kleine tafels reserveren.";
 		}
@@ -101,17 +116,20 @@
 
 		foreach ($resultTafel as $tafel) 
 		{
-			$Reservatie->Tafelnummer = $tafel['Tafelnummer'];
 			$resultDatum = $Reservatie->CheckDatum();
 
 			if(mysqli_num_rows($resultDatum) == 0)
 			{
-				echo "<li class='huidigeres'>";
+				echo "<form method='post' action='' class='huidigeres'>";
 				echo" <span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
 					  Maximum aantal personen: " . $tafel['MaxPersonen'] . "
 					  Opmerkingen: " . $tafel['Opmerkingen'];
 				echo "</li>";
-				echo"<button id='reserveerprint'>Deze tafel reserveren</button>";
+				echo "<input type='hidden' name='restafel' value='" . $tafel['Tafelnummer'] . "'/>";
+				echo "<input type='hidden' name='resdatum' value='" . $datum . "'/>";
+				echo "<input type='hidden' name='resuur' value='" . $startuur . "'/>";
+				echo"<INPUT type='submit' name='ressubmit' id='reserveerprint' value='Deze tafel reserveren'/>";
+				echo "</form>";
 				
 			}
 		}
@@ -123,22 +141,26 @@
 
 			foreach ($resultTafel as $tafel) 
 			{
-				$Reservatie->Tafelnummer = $tafel['Tafelnummer'];
 				$resultDatum = $Reservatie->CheckDatum();
 
 				if(mysqli_num_rows($resultDatum) == 0)
 				{
-					echo "<li class='huidigeres'>";
-					echo"<span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
-						 Maximum aantal personen: " . $tafel['MaxPersonen'] . "
-						 Opmerkingen: " . $tafel['Opmerkingen'];
-					echo "</li>";
-					echo"<button id='reserveerprint'>Deze tafel reserveren</button>";
+					$rtafel = $tafel['Tafelnummer'];
+
+					echo "<form method='post' action='' class='huidigeres'>";
+				echo" <span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
+					  Maximum aantal personen: " . $tafel['MaxPersonen'] . "
+					  Opmerkingen: " . $tafel['Opmerkingen'];
+				echo "</li>";
+				echo "<input type='hidden' name='restafel' value='" . $tafel . "'/>";
+				echo "<input type='hidden' name='resdatum' value='" . $datum . "'/>";
+				echo "<input type='hidden' name='resuur' value='" . $startuur . "'/>";
+				echo"<INPUT type='submit' name='ressubmit' id='reserveerprint' value='Deze tafel reserveren'/>";
+				echo "</form>";
 					
 				}
 			}
 		}
-		
 		
 	}
 	
@@ -170,13 +192,6 @@ if (empty($_POST))
 
 <div id='resbevtitel'></div>
 <div id="resbev"></div>
-
-
-
-<!-- reservatie moet $tafelr $datum $uur pakken en in reservatie steken. -->
-
-
-
 	
 </body>
 </html>
