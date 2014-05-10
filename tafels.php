@@ -33,12 +33,15 @@
 	<script>
 		$(document).ready(function(){
 			$("#resbevtitel").hide();
+
 			$("#reserveerprint").on('click', function(){
-				$("#resbevtitel").show();
+				$("#resbevtitel").show('slow');
 				$("#resbevtitel").html('<h2>Deze reservatie was succesvol:</h2>');
 
 				var text = $(this).prev().text();
 				$("#resbev").text(text);
+
+				$("#reserveer").hide('slow');
 			});
 		});
 	</script>
@@ -77,6 +80,7 @@
 
 </form>
 
+<section id='reserveer'>
 <?php
 	if (!empty($_POST)) 
 	{
@@ -107,8 +111,8 @@
 			{
 				echo "<li class='huidigeres'>";
 				echo" <span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
-				Maximum aantal personen: " . 		$tafel['MaxPersonen'] . "
-				Opmerkingen: " . 		$tafel['Opmerkingen'];
+					  Maximum aantal personen: " . $tafel['MaxPersonen'] . "
+					  Opmerkingen: " . $tafel['Opmerkingen'];
 				echo "</li>";
 				echo"<button id='reserveerprint'>Deze tafel reserveren</button>";
 				
@@ -129,12 +133,13 @@
 
 				if(mysqli_num_rows($check3) == 0)
 				{
-					echo "<li>";
+					echo "<li class='huidigeres'>";
 					echo"<span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
-					Maximum aantal personen: " . 		$tafel['MaxPersonen'] . "
-					Opmerkingen: " . 		$tafel['Opmerkingen'];
-					echo"<button id='reserveerprint'>Deze tafel reserveren</button>";
+						 Maximum aantal personen: " . $tafel['MaxPersonen'] . "
+						 Opmerkingen: " . $tafel['Opmerkingen'];
 					echo "</li>";
+					echo"<button id='reserveerprint'>Deze tafel reserveren</button>";
+					
 				}
 			}
 		}
@@ -143,6 +148,7 @@
 	}
 	
 ?>
+</section>
 
 <ul id='tafels'>
 
@@ -159,8 +165,8 @@ if (empty($_POST))
 
 		echo "<li>";
 		echo"<span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
-		Maximum aantal personen: " . 		$tafel['MaxPersonen'] . "
-		Opmerkingen: " . 		$tafel['Opmerkingen'];
+		Maximum aantal personen: " . $tafel['MaxPersonen'] . "
+		Opmerkingen: ".$tafel['Opmerkingen'];
 		echo "</li>";
 	}
 }
