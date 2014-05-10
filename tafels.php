@@ -1,7 +1,9 @@
-<?php include_once('classes/db.php')?>
-<?php $db = new Db(); ?>
+<?php 
 
-<?php
+	include_once('classes/db.php');
+	$db = new Db();
+
+
 	if (!empty($_POST)) 
 	{
 
@@ -24,13 +26,29 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	
 	<meta charset="UTF-8">
 	<title>Reservatie</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#resbevtitel").hide();
+
+			$("#reserveerprint").on('click', function(){
+				$("#resbevtitel").show('slow');
+				$("#resbevtitel").html('<h2>Deze reservatie was succesvol:</h2>');
+
+				var text = $(this).prev().text();
+				$("#resbev").text(text);
+
+				$("#reserveer").hide('slow');
+			});
+		});
+	</script>
 </head>
 <body>
 
-		<?php include_once('classes/nav_include.php') ?>
+<?php include_once('classes/nav_include.php') ?>
 
 
 <h1>RESERVATIE</h1>
@@ -62,14 +80,19 @@
 
 </form>
 
+<section id='reserveer'>
 <?php
 	if (!empty($_POST)) 
 	{
 
-		echo "<h3> Tafels van " . $aantal . " personen:</h3>";
+		echo "<h2> Tafels van " . $aantal . " personen:</h2>";
 
 		
-		if(mysqli_num_rows($check) == 0)
+		if(mysqli_num_rows($check) ==0 && mysqli_num_rows($check2)== 0)
+		{
+			echo "<p>Er zijn geen tafels voor " .$aantal. " personen. U kan wel meerdere kleine tafels reserveren.";
+		}
+		else if(mysqli_num_rows($check) == 0)
 		{
 			echo "<p> Er is geen tafel vrij voor exact " . $aantal . " personen.
 			Kijk hieronder voor andere reserveerbare tafels voor meer dan " . $aantal . " personen</p>";
@@ -88,8 +111,8 @@
 			{
 				echo "<li class='huidigeres'>";
 				echo" <span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
-				Maximum aantal personen: " . 		$tafel['MaxPersonen'] . "
-				Opmerkingen: " . 		$tafel['Opmerkingen'];
+					  Maximum aantal personen: " . $tafel['MaxPersonen'] . "
+					  Opmerkingen: " . $tafel['Opmerkingen'];
 				echo "</li>";
 				echo"<button id='reserveerprint'>Deze tafel reserveren</button>";
 				
@@ -99,7 +122,7 @@
 		
 		if(mysqli_num_rows($check2) != 0)
 		{
-			echo "<h3> Tafels die u ook kan reserveren:</h3>";
+			echo "<h2> Tafels die u ook kan reserveren:</h2>";
 
 			foreach ($result2 as $tafel) 
 			{
@@ -110,20 +133,22 @@
 
 				if(mysqli_num_rows($check3) == 0)
 				{
-					echo "<li>";
+					echo "<li class='huidigeres'>";
 					echo"<span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
-					Maximum aantal personen: " . 		$tafel['MaxPersonen'] . "
-					Opmerkingen: " . 		$tafel['Opmerkingen'];
-					echo"<button id='reserveerprint'>Deze tafel reserveren</button>";
+						 Maximum aantal personen: " . $tafel['MaxPersonen'] . "
+						 Opmerkingen: " . $tafel['Opmerkingen'];
 					echo "</li>";
+					echo"<button id='reserveerprint'>Deze tafel reserveren</button>";
+					
 				}
 			}
 		}
-
+		
 		
 	}
 	
 ?>
+</section>
 
 <ul id='tafels'>
 
@@ -132,7 +157,7 @@
 if (empty($_POST)) 
 {
 	$sql3 = "select * from tafelbeheer order by Tafelnummer";
-	echo"<h3>Alle tafels van dit restaurant</h3>";
+	echo"<h2>Alle tafels van dit restaurant</h2>";
 
 	$result3 = $db->conn->query($sql3);
 	foreach ($result3 as $tafel) 
@@ -140,30 +165,22 @@ if (empty($_POST))
 
 		echo "<li>";
 		echo"<span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
-		Maximum aantal personen: " . 		$tafel['MaxPersonen'] . "
-		Opmerkingen: " . 		$tafel['Opmerkingen'];
+		Maximum aantal personen: " . $tafel['MaxPersonen'] . "
+		Opmerkingen: ".$tafel['Opmerkingen'];
 		echo "</li>";
 	}
 }
 ?> 
 </ul>
 
-<section id="reservatiebevestiging">
+<div id='resbevtitel'></div>
+<div id="resbev"></div>
 
-	<script>
-		$(document).ready(function(){
-			$("#reserveerprint").on('click', function(){
-				var text = $(this).prev().text();
 
-				$("#reservatiebevestiging").text(text);
-			});
-		});
-	</script>
 
-<!--<?php include('reservatie.php') ?>
-//seservatie moet $tafelr $datum $uur pakken en in reservatie steken.-->
+<!-- reservatie moet $tafelr $datum $uur pakken en in reservatie steken. -->
 
-</section>
+
 
 	
 </body>
