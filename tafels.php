@@ -24,6 +24,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<meta charset="UTF-8">
 	<title>Reservatie</title>
 </head>
@@ -85,12 +86,13 @@
 
 			if(mysqli_num_rows($check3) == 0)
 			{
-				echo "<li>";
-				echo"<span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
+				echo "<li class='huidigeres'>";
+				echo" <span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
 				Maximum aantal personen: " . 		$tafel['MaxPersonen'] . "
 				Opmerkingen: " . 		$tafel['Opmerkingen'];
-				echo"<button>Deze tafel reserveren</button>";
 				echo "</li>";
+				echo"<button id='reserveerprint'>Deze tafel reserveren</button>";
+				
 			}
 		}
 
@@ -100,23 +102,23 @@
 			echo "<h3> Tafels die u ook kan reserveren:</h3>";
 
 			foreach ($result2 as $tafel) 
-		{
+			{
 
 			$tafelnr = $tafel['Tafelnummer'];
 			$sql3 = "select * from reservatie where Tafelnummer='" . $tafelnr . "' and Datum ='" . $datum . "'";
 			$check3 = mysqli_query($db->conn,$sql3);
 
-			if(mysqli_num_rows($check3) == 0)
-			{
-				echo "<li>";
-				echo"<span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
-				Maximum aantal personen: " . 		$tafel['MaxPersonen'] . "
-				Opmerkingen: " . 		$tafel['Opmerkingen'];
-				echo"<button>Deze tafel reserveren</button>";
-				echo "</li>";
+				if(mysqli_num_rows($check3) == 0)
+				{
+					echo "<li>";
+					echo"<span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
+					Maximum aantal personen: " . 		$tafel['MaxPersonen'] . "
+					Opmerkingen: " . 		$tafel['Opmerkingen'];
+					echo"<button id='reserveerprint'>Deze tafel reserveren</button>";
+					echo "</li>";
+				}
 			}
 		}
-	}
 
 		
 	}
@@ -143,13 +145,23 @@ if (empty($_POST))
 		echo "</li>";
 	}
 }
-?>
+?> 
 </ul>
 
 <section id="reservatiebevestiging">
 
-<?php include('reservatie.php') ?>
-//seservatie moet $tafelr $datum $uur pakken en in reservatie steken.
+	<script>
+		$(document).ready(function(){
+			$("#reserveerprint").on('click', function(){
+				var text = $(this).prev().text();
+
+				$("#reservatiebevestiging").text(text);
+			});
+		});
+	</script>
+
+<!--<?php include('reservatie.php') ?>
+//seservatie moet $tafelr $datum $uur pakken en in reservatie steken.-->
 
 </section>
 
