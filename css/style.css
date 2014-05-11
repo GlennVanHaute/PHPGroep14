@@ -1,0 +1,33 @@
+.nav-pills {
+	background-color: #333333;
+}
+.nav-pills>li.active>a{
+	border-radius: 0px;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+	border-radius: 0px;
+}
+ul
+{
+	list-style-type: none;
+}
+.form-control 
+{
+	margin-top: 20px;
+}
+.select
+{
+	margin-top: 20px;
+}
+.container-fluid
+{
+	background-color: #000;
+	float: right;
+	width: 85%;
+}
+.nav-sidebar
+{
+	float: left;
+	width: 15%;
+}
