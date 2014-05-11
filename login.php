@@ -39,7 +39,7 @@ if (isset($_POST['btnLogin'])) {
     console.log(response);
     if (response.status === 'connected') {
 
-      window.location.replace("tafels.php");
+      // window.location.replace("tafels.php");
       
     } else if (response.status === 'not_authorized') {
       document.getElementById('status').innerHTML = 'Please log ' +
@@ -82,11 +82,13 @@ if (isset($_POST['btnLogin'])) {
 </script> 
  
 <div class="container">
-	<nav>
+<!-- 	<nav>
 		<a href="logout.php"Logout>Logout</a>
-	</nav>
+	</nav> -->
+	<h2>Log hier in via Facebook</h2>
+	<div class="row"><div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true"></div></div>
 
-		<h2>Log hier in</h2>
+		<h2>Log hier in (voor restauranthouder) </h2>
 	<section id="login">
 		<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 		<input type="text" name="username" placeholder="Email" required="required" />
@@ -98,26 +100,10 @@ if (isset($_POST['btnLogin'])) {
 		
 	</section>	
 	
-	<section id="signup">
 	
-		<h2>Maak hier een account aan om je tafel te kunnen reserveren!</h2>
-		<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-		<input type="text" name="name" placeholder="Full name"required="required" />
-		<input type="email" name="email" placeholder="Email" required="required"/>
-		<input type="password" name="password" placeholder="Password" required="required"/>
-		<input type="submit" name="btnSignup" value="Sign up for IMD Talks" />
-		</form>
-		<div id="feedback">
-			<?php
+		<a href="register.php">Ben je een nieuwe restauranthouder? registreer dan hier</a>
 		
-		if(!empty($feedback)){
-			 echo $feedback; 
-		}
-		 
-		 ?></div>
-	</section>
-		<div class="row"><div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true"></div></div>
-	</div>	
+
 
 </div>
 </body>
