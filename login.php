@@ -39,7 +39,7 @@ if (isset($_POST['btnLogin'])) {
     console.log(response);
     if (response.status === 'connected') {
 
-      // window.location.replace("tafels.php");
+      window.location.replace("tafels.php");
       
     } else if (response.status === 'not_authorized') {
       document.getElementById('status').innerHTML = 'Please log ' +
