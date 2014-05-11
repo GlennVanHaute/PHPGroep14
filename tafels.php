@@ -21,8 +21,9 @@
 		$resultTafelHoger = $Tafel->CheckAantalHoger($aantal);
 
 	}
+	
 
-	if (!empty($_POST['ressubmit'])) 
+	if (!empty($_POST['ressubmit'])&& !empty($_POST['aantal']) && !empty($_POST['datum']) && !empty($_POST['uur']))  
 	{
 		$Reservatie->Tafelnummer = $_POST['restafel'];
 		$Reservatie->Datum = $_POST['resdatum'];
