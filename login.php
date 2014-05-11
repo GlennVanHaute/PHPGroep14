@@ -1,5 +1,5 @@
 <?php 
-
+		session_start();
 include("classes/User.class.php");
 if (isset($_POST['btnSignup'])) {
 	try{
@@ -39,7 +39,7 @@ if (isset($_POST['btnLogin'])) {
     console.log(response);
     if (response.status === 'connected') {
 
-      window.location.replace("tafels.php");
+      // window.location.replace("tafels.php");
       
     } else if (response.status === 'not_authorized') {
       document.getElementById('status').innerHTML = 'Please log ' +

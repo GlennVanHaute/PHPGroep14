@@ -1,5 +1,5 @@
 <?php 
-	include_once("Db.class.php");
+	include_once("classes/db.class.php");
 	
 	class User
 	{
@@ -45,11 +45,11 @@
 			}
 		}
 		
-		public function Save()
+		public function Register()
 		{
 			// save user to database
-			$db = new Db();
-			$sql = "insert into imdtalks (name, email, password)
+			$db = new Database();
+			$sql = "insert into tblusers (name, email, password)
 					values(
 							'".$db->conn->real_escape_string($this->m_sName)."', 
 							'".$db->conn->real_escape_string($this->m_sEmail)."', 
@@ -57,9 +57,32 @@
 					)";
 			$db->conn->query($sql);
 		}
+
+
+		public function canLogin()
+		{
+			$db = new Database();
+			$sql = "SELECT * FROM tblusers WHERE name ='" . $this->m_sName . "' AND password = '" . $this->m_sPassword . "';";			
+			$check = $db->conn->query($sql);
+
+			if(mysqli_num_rows($check) == 1)
+			{
+				session_start();
+				$_SESSION['admin'] = true;
+
+				#echo "Login geslaagd";
+				header('Location: tafels.php');
+			} 
+			else 
+			{
+				throw new Exception("User and/or password are not correct");
+				$_SESSION['admin'] = false;
+			}
+		}
+
+
 		
 	}
 
 ?>
 
- ?>
