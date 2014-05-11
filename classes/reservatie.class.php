@@ -1,13 +1,12 @@
 <?php
 		
-include_once ("db.php");
+include_once ("db.class.php");
 
 		class Reservatie
 		{
 			private $m_iTafelnummer;
 			private $m_sDatum;
-			private $m_sBeginuur;
-			private $m_sEinduur;
+			private $m_sUur;
 			
 
 
@@ -16,19 +15,15 @@ include_once ("db.php");
 				switch ($p_sProperty) 
 				{
 					case 'Tafelnummer':
-						$this->m_sPersoon = $p_vValue;
+						$this->m_iTafelnummer = $p_vValue;
 						break;
 
 					case 'Datum':
 						$this->m_sDatum = $p_vValue;
 						break;
 
-					case 'Beginuur':
-						$this->m_sBeginuur = $p_vValue;
-						break;
-
-					case 'Einduur':
-						$this->m_sEinduur = $p_vValue;
+					case 'Uur':
+						$this->m_sUur = $p_vValue;
 						break;
 				}
 
@@ -40,19 +35,15 @@ include_once ("db.php");
 				switch ($p_sProperty) 
 				{
 					case 'Tafelnummer':
-						return $this->m_sPersoon;
+						return $this->m_iTafelnummer;
 						break;
 
 					case 'Datum':
 						return $this->m_sDatum;
 						break;
 
-					case 'Beginuur':
-						return $this->m_sBeginuur;
-						break;
-
-					case 'Einduur':
-						return $this->m_sEinduur;
+					case 'Uur':
+						return $this->m_sUur;
 						break;
 				}
 			}
@@ -60,7 +51,7 @@ include_once ("db.php");
 
 			public function CheckDatum()
 			{
-				$db = new db();
+				$db = new Database();
 				$sql = "select * from reservatie where Tafelnummer='" . $this->Tafelnummer . "' and Datum ='" . $this->Datum . "';";
 				return $db->conn->query($sql);
 
@@ -70,17 +61,15 @@ include_once ("db.php");
 			{
 				echo "check functie Reserveer <br/>";
 				echo "nummer: $this->Tafelnummer  <br/>";
-				echo "datum: $this->Datum  <br/>";
-				echo "beginuur: $this->Beginuur  <br/>";
-				echo "beginuur2: $this->Einduur  <br/>";
+				echo "datum: $this->Datum <br/>";
+				echo "uur: $this->Uur  <br/>";
 
-				$db = new db();
-				$sql = "INSERT INTO reservatie (Tafelnummer, Beginuur, Einduur) 
+				$db = new Database();
+				$sql = "INSERT INTO reservatie (Tafelnummer, Datum, Uur) 
 				VALUES (
 			'".	$db->conn->real_escape_string($this->Tafelnummer)."',
 			'".	$db->conn->real_escape_string($this->Datum)."',
-			'".	$db->conn->real_escape_string($this->Beginuur)."',
-			'".	$db->conn->real_escape_string($this->Einduur)."')";
+			'".	$db->conn->real_escape_string($this->Uur)."')";
 				return $db->conn->query($sql);
 
 				echo "$sql";

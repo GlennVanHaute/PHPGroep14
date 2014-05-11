@@ -1,6 +1,6 @@
 <?php
 
-include_once('db.php');
+include_once('db.class.php');
 
 class nieuwMenu
 {
@@ -72,7 +72,7 @@ class nieuwMenu
 	public function getAll()
 	{
 
-		$db = new Db();
+		$db = new Database();
 		$sql = "select * from nieuwMenu";
     	return $db->conn->query($sql);
 	}

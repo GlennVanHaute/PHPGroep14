@@ -1,7 +1,7 @@
 
 <?php
 
-include_once('db.php');
+include_once('db.class.php');
 
 class Tafel
 {
@@ -58,7 +58,7 @@ class Tafel
 
 	public function Save()
 	{
-		$db = new Db();
+		$db = new Database();
 		$sql = "INSERT INTO tafelbeheer (Tafelnummer, MaxPersonen, Opmerkingen) 
 		VALUES (
 			'".	$db->conn->real_escape_string($this->nummer)."',
@@ -70,7 +70,7 @@ class Tafel
 
 	public function Edit()
 	{
-		$db = new Db();
+		$db = new Database();
 		$sql = "UPDATE tafelbeheer
 				SET 
 					Tafelnummer = '".$db->conn->real_escape_string($this->nummer)."',
@@ -86,7 +86,7 @@ class Tafel
 
 	public function Delete()
 	{
-		$db = new Db();
+		$db = new Database();
 		$sql = "DELETE FROM tafelbeheer
 				WHERE Tafelnummer = '".$this->nummer."'
 				";
@@ -95,14 +95,14 @@ class Tafel
 
 	public function GetAll()
 	{
-		$db = new Db();
+		$db = new Database();
 		$sql = "select * from tafelbeheer order by Tafelnummer";
     	return $db->conn->query($sql);
 	}
 
 	public function CheckAantal()
 	{
-		$db = new Db();
+		$db = new Database();
 		$sql = "select * from tafelbeheer where MaxPersonen ='" . $this->personen . "' order by Tafelnummer;";
 		return $result = $db->conn->query($sql);
 
@@ -111,7 +111,7 @@ class Tafel
 
 	public function CheckAantalHoger()
 	{
-		$db = new db();
+		$db = new Database();
 		$sql = "select * from tafelbeheer where MaxPersonen >'" . $this->personen . "' order by Tafelnummer;";
 		return $db->conn->query($sql);
 	}
