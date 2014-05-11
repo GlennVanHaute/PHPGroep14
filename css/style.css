@@ -31,3 +31,10 @@ ul
 	float: left;
 	width: 15%;
 }
+li.visibleeuh {
+
+	display: none;
+}
+li.block {
+	display: block;
+}

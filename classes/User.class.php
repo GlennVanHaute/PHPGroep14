@@ -68,7 +68,7 @@
 			if(mysqli_num_rows($check) == 1)
 			{
 				session_start();
-				$_SESSION['admin'] = true;
+				$_SESSION['admin'] = false;
 
 				#echo "Login geslaagd";
 				header('Location: tafels.php');
@@ -76,7 +76,7 @@
 			else 
 			{
 				throw new Exception("User and/or password are not correct");
-				$_SESSION['admin'] = false;
+				
 			}
 		}
 
