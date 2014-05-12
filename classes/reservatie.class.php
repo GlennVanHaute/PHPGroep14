@@ -79,7 +79,7 @@ include_once ("db.class.php");
 			'".	$db->conn->real_escape_string($this->Personen)."',
 			'".	$db->conn->real_escape_string($this->Datum)."',
 			'".	$db->conn->real_escape_string($this->Uur)."')";
-				print_r($sql);
+				
 				return $db->conn->query($sql);
 			}
 
@@ -94,7 +94,7 @@ include_once ("db.class.php");
 			public function GetAll()
 			{
 				$db = new Database();
-				$sql = "select * from reservatie order by Tafelnummer";
+				$sql = "select * from reservatie order by Datum";
 				return $db->conn->query($sql);
 			}
 

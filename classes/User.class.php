@@ -7,6 +7,8 @@
 		private $m_sName;
 		private $m_sEmail;
 		private $m_sPassword;
+		public $errors = array();
+		public $feedbacks = array();
 
 		
 		public function __set($p_sProperty, $p_vValue)
@@ -38,6 +40,7 @@
 		}
 		public function __get($p_sProperty)
 		{
+			$vResult = null;
 			switch($p_sProperty)
 			{
 				case "Voornaam": return $this-> m_sVoornaam;
@@ -52,22 +55,58 @@
 				case "Password": return $this-> m_sPassword;
 				break;
 
-
+			return $vResult;
 			}
 		}
+		public function EmailAvailable()
+	{
+			$db = new Database();
+		$sql = "select * from tblusers where email = '".$db->conn->real_escape_string($this->m_sEmail)."';";
+		$result = $db->conn->query($sql);
+		if($result)
+		{
+			if(mysqli_num_rows($result) === 0)
+			{
+				$available = true;
+			}
+			else
+			{
+				$available = false;
+				$this->errors['errorAvailable'] = 'We kunnen deze username niet opslagen!';
+			}
+		}
+		else
+		{
+			$available = false;
+			$this->errors['errorDB'] = "Connection to Database has failed!";
+		}
+		return $available;
+
+		
+	}
 		
 		public function Register()
 		{
 			// save user to database
 			$db = new Database();
-			$sql = "insert into tblusers (voornaam, naam, email, password)
+			$sSql = "insert into tblusers (voornaam, naam, email, password)
 					values(
 							'".$db->conn->real_escape_string($this->m_sVoornaam)."', 
 							'".$db->conn->real_escape_string($this->m_sName)."', 
 							'".$db->conn->real_escape_string($this->m_sEmail)."',
 							'".$db->conn->real_escape_string($this->m_sPassword)."'
 					)";
-			$db->conn->query($sql);
+			$rResult = $db->conn->query($sSql);
+			if ($rResult)
+			{	
+				$this->feedbacks['Signedup'] = "Thanks for signing up!";
+			}
+			else
+			{		
+				echo $sSql;			
+				// er zijn geen query resultaten, dus query is gefaald
+				$this->errors['errorCreate'] = "Caramba couldn't create your account!";
+			}	
 		}
 
 		public function Register2()
