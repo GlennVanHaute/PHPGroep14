@@ -19,14 +19,7 @@ include_once ("db.class.php");
 						break;
 
 					case 'Datum':
-					if (!empty($_POST['datum']))
-					{
-						$this->m_sDatum = $p_vValue;
-					}
-					else
-					{
-						throw new Exception("Gelieve de datum in te vullen");
-					}
+						$this->m_sDatum = $p_vValue;					
 						break;
 
 					case 'Uur':

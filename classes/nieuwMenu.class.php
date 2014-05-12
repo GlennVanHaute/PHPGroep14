@@ -57,7 +57,7 @@ class nieuwMenu
 
 	public function Save()
 	{
-		$db = new Db();
+		$db = new Database();
 		$sql = "INSERT INTO nieuwMenu(Naam,Details,Prijs) 
 				VALUES (
 					'".	$db->conn->real_escape_string($this->naam)."',
@@ -79,7 +79,7 @@ class nieuwMenu
 
 	public function Update()
 	{
-		$db = new Db();
+		$db = new Database();
 		// UPDATE `nieuwMenu` 
 		// SET 
 		// `Naam`=[value-2],
@@ -101,7 +101,7 @@ class nieuwMenu
 
 	public function Delete()
 	{
-		$db = new Db();
+		$db = new Database();
 		$sql = "DELETE FROM nieuwMenu
 				WHERE id = '".$this->id."'
 				";
@@ -110,7 +110,7 @@ class nieuwMenu
 
 	public function Check()
 		{
-			$db = new db();
+			$db = new Database();
 			$sql = "SELECT * FROM nieuwMenu WHERE Naam = '".$this->naam."';";
 			$result = $db->conn->query($sql);
 			//print_r($sql);

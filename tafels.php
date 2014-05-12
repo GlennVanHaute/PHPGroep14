@@ -26,7 +26,7 @@
 	}
 	
 
-	if (!empty($_POST['ressubmit'])&& !empty($_POST['aantal']) && !empty($_POST['datum']) && !empty($_POST['uur']))  
+	if (!empty($_POST['ressubmit']))  
 	{
 		$Reservatie->Tafelnummer = $_POST['restafel'];
 		$Reservatie->Datum = $_POST['resdatum'];
@@ -180,9 +180,9 @@
 		foreach ($resultTafel as $tafel) 
 		{
 			$resultDatum = $Reservatie->CheckDatum();
-			echo ($tafel);
+			
 
-			if(mysqli_num_rows($resultDatum) == 0)
+			if(mysqli_num_rows($resultDatum) == 1)
 			{
 				echo "<form method='post' action='' class='huidigeres'>";
 				echo "<span> Tafel " . $tafel['Tafelnummer'] . "</span>

@@ -3,7 +3,7 @@
 	include_once("classes/db.class.php");
 
 	
-		$db = new Db();
+		$db = new Database();
 		$sql = "select * from tblreservatie";
 		$result = $db->conn->query($sql);
 
@@ -18,6 +18,7 @@
 			echo '<p>' .'Aantal personen: ' . $post['Hoeveel'].'</p>';
 			echo '<p>' .'Datum: '. $post['Datum'] . '</p>';
 			echo '<p>' .'Tijdstip: '. $post['Tijdstip'] . '</p>';
+			echo '<p>' .'Tafelnummer: ' . $post['Tafelnummer'] . '</p>';
 			echo "</li>";
 		}
 		echo "</ul>";
