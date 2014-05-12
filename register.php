@@ -4,34 +4,35 @@ if (isset($_POST['btnSignup'])) {
 	try{
 	$user = new User();
 	$user->Voornaam = $_POST['voornaam'];
-	$user -> Name = $_POST['naam'];
-	$user -> Email = $_POST['email'];
-	$user -> Password = $_POST['password'];
-	$available = $user->EmailAvailable();
-		if($available == true){
-			$user -> Register();
-			if(isset($user->errors) && !empty($user->errors))
-			{
-				if(isset($user->errors['errorCreate']))
-				{
-					$error = $user->errors['errorCreate'];
-				}
-			}
-			else
-			{
-				$feedback = $user->feedbacks['Signedup'];
-			}
-		}
-		else
-		{
-			if(isset($user->errors) && !empty($user->errors))
-			{
-				if(isset($user->errors['errorAvailable']))
-				{
-					$error = $user->errors['errorAvailable'];
-				}
-			}
-		}
+	$user->Name = $_POST['naam'];
+	$user->Email = $_POST['email'];
+	$user->Password = $_POST['password'];
+	$user -> Register();
+	// $available = $user->EmailAvailable();
+	// 	if($available == true){
+
+	// 		if(isset($user->errors) && !empty($user->errors))
+	// 		{
+	// 			if(isset($user->errors['errorCreate']))
+	// 			{
+	// 				$error = $user->errors['errorCreate'];
+	// 			}
+	// 		}
+	// 		else
+	// 		{
+	// 			$feedback = $user->feedbacks['Signedup'];
+	// 		}
+	// 	}
+	// 	else
+	// 	{
+	// 		if(isset($user->errors) && !empty($user->errors))
+	// 		{
+	// 			if(isset($user->errors['errorAvailable']))
+	// 			{
+	// 				$error = $user->errors['errorAvailable'];
+	// 			}
+	// 		}
+	// 	}
 		
 	
 	}catch (Exception $e)
@@ -44,10 +45,10 @@ if (isset($_POST['btnSignup'])) {
 	if (isset($_POST['btnSignup2'])) {
 	try{
 	$user = new User();
-	$user -> Voornaam = $_POST['voornaam'];
-	$user -> Name = $_POST['naam'];
-	$user -> Email = $_POST['email'];
-	$user -> Password = $_POST['password'];
+	$user->Voornaam = $_POST['voornaam'];
+	$user->Name = $_POST['naam'];
+	$user->Email = $_POST['email'];
+	$user->Password = $_POST['password'];
 
 	$user -> Register2();
 	}catch (Exception $e)
@@ -68,41 +69,41 @@ if (isset($_POST['btnSignup'])) {
 	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="style.css" media="all">
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-	console.log('ready');
-	$("#email").on("blur", function(e){
-				//var clickedLink = $(this);
-				console.log('BLURED');
-				var email = $("#email").val();
-				console.log(email);
-				$(".emailFeedback").css("display","block");
-				$.ajax({
-				  type: "POST",
-				  url: "ajax/ajax-usernamecheck.php",
-				  data: { email: email }
-				})
-				  .done(function(result) {
-				    console.log(result);
-				    if(result == 'true')
-				    {
-				    	$(".emailFeedback").html("<p id='available'>Yup :), email is available!</p>");
-				    }
-				    else
-				    {
-				    	$(".emailFeedback").html("<p id='notavailable'>:( sorry, email is already taken!</p>");
-				    }
-				  });
+// <script type="text/javascript">
+// $(document).ready(function(){
+// 	console.log('ready');
+// 	$("#email").on("blur", function(e){
+// 				//var clickedLink = $(this);
+// 				console.log('BLURED');
+// 				var email = $("#email").val();
+// 				console.log(email);
+// 				$(".emailFeedback").css("display","block");
+// 				$.ajax({
+// 				  type: "POST",
+// 				  url: "ajax/ajax-usernamecheck.php",
+// 				  data: { email: email }
+// 				})
+// 				  .done(function(result) {
+// 				    console.log(result);
+// 				    if(result == 'true')
+// 				    {
+// 				    	$(".emailFeedback").html("<p id='available'>Yup :), email is available!</p>");
+// 				    }
+// 				    else
+// 				    {
+// 				    	$(".emailFeedback").html("<p id='notavailable'>:( sorry, email is already taken!</p>");
+// 				    }
+// 				  });
 
-				e.preventDefault();
-			});
+// 				e.preventDefault();
+// 			});
 
-	$("#email").on("focus", function(e){
-		$(".feedback").css("display","none");
-		$(".error").css("display","none");
-	});
-});
-</script>
+// 	$("#email").on("focus", function(e){
+// 		$(".feedback").css("display","none");
+// 		$(".error").css("display","none");
+// 	});
+// });
+// </script>
 </head>
 <body>
 	<div class="container">
@@ -128,7 +129,7 @@ $(document).ready(function(){
 
 			<div class="form-group">
 			<input type="email" id="email" name="email" placeholder="Email" required="required"/>
-			<div class="emailFeedback"><span>checking</span></div>
+<!-- 			<div class="emailFeedback"><span>checking</span></div> -->
 			<input type="password" name="password" placeholder="Password" required="required"/>
 			</div>
 
