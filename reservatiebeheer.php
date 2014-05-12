@@ -56,9 +56,9 @@
 </head>
 <body>
 <?php include_once('nav_include.php') ?>
+		<section id="wrapper">
 <h1>RESERVATIE BEHEER</h1>
 	<img src="images/line.png" class="headerline" alt="line"/>
-		<section id="wrapper">
 			<h2>Zoek hier naar beschikbare tafels:</h2>
 				<section class="blok">
 					<form action="" method="post">
@@ -175,10 +175,10 @@
 					<h2>Overzicht gemaakte reservaties</h2>
 						<?php 
 							 $result = $Reservatie->GetAll();
-								echo "<ul>";
+								echo "<ul class='blok>'";
 								foreach ($result as $res) 
 								{
-									echo "<li class='col-xs-4 col-md-4'>";
+									echo "<li>";
 									//echo '<p>' GLENN PRINT HIER NAAM GEBRUIKER AF '</p>';
 									echo "<p> Tafel : " . $res['Tafelnummer']."</p>";
 									echo "<p> Gereserveerd voor " .$res['Personen']." personen</p>";
