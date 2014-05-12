@@ -23,8 +23,7 @@ include_once ("db.class.php");
 						$this->m_iPersonen = $p_vValue;
 						break;
 
-					case 'Datum':
-
+					case 'Datum'
 						$this->m_sDatum = $p_vValue;					
 						break;
 
