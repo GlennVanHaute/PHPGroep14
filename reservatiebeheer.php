@@ -187,6 +187,8 @@
 
 	 <?php 
 
+	 $result = $Reservatie->GetAll();
+
 		foreach ($result as $res) 
 		{
 			echo "<li class='col-xs-4 col-md-4'>";
