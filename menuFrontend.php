@@ -8,7 +8,9 @@
  <html lang="en">
  <head>
  	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
- 	
+	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/slicknav.css">
  	<script type="text/javascript">	
  	$(document).ready(function(){
  		$('.target').change(function(){
@@ -26,7 +28,16 @@
  	<title>Menukaart</title>
  </head>
  <body>
- 	<h1>Menukaart</h1>
+
+
+
+ 	<?php include('nav_include.php') ?>
+
+ <section id="wrapper">
+ 	<h1>MENU</h1>
+ 	<img src="images/line.png" class="headerline" alt="line"/>
+	
+	<section class="menucss">
  	<?php 
 	$res = $nieuwMenu->getAll();
 
@@ -45,6 +56,7 @@
 
  	 ?>
  	
- 	
+ 	</section>
+</section>
  </body>
  </html>

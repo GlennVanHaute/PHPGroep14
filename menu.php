@@ -54,7 +54,9 @@
 <head>
 	<meta charset="UTF-8">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	
+	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/slicknav.css">
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$("#nieuwMenu").on('keyup', function(){
@@ -90,7 +92,16 @@
 	<title>Menu</title>
 </head>
 <body>
-	<h1>Nieuw gerecht aanmaken</h1>
+
+<section id="wrapper">
+
+	<?php include('nav_include.php') ?>
+
+	<h1> MENU </h1>
+	<img src="images/line.png" class="headerline" alt="line"/>
+
+	<section class="menucss">
+	<h2>Nieuw gerecht aanmaken</h1>
 
 	<div class="status"></div>
 
@@ -111,9 +122,10 @@
 	<input name="btnMenuAanmaken" type="submit" value="Gerecht aanmaken" />
 
 	</form>
+</section>
+<section class="menucss">
 
-
-	<h1>Huidige gerechten</h1>
+	<h2>Huidige gerechten</h1>
 	<?php 
   		$res = $nieuwMenu->getAll();
 
@@ -141,7 +153,7 @@
 	?>	
 	
 	
-
-		
+</section>
+</section>		
 </body>
 </html>
