@@ -21,12 +21,10 @@
 
 		$Tafel->personen = $_POST['aantal'];
 		$resultTafelHoger = $Tafel->CheckAantalHoger();
-		print_r($resultTafelHoger);
-
 	}
 	
 
-	if (!empty($_POST['ressubmit'])&& !empty($_POST['aantal']) && !empty($_POST['datum']) && !empty($_POST['uur']))  
+	if (!empty($_POST['ressubmit']))  
 	{
 		$Reservatie->Tafelnummer = $_POST['restafel'];
 		$Reservatie->Datum = $_POST['resdatum'];
@@ -123,7 +121,7 @@
 <?php include_once('nav_include.php') ?>
 
 
-<h1>RESERVATIE</h1>
+<h1>RESERVATI</h1>
 <p>Kijk hier of er beschikbare tafels zijn:</p>
 <div class="container-fluid">
 <div class="row">
@@ -180,7 +178,6 @@
 		foreach ($resultTafel as $tafel) 
 		{
 			$resultDatum = $Reservatie->CheckDatum();
-			echo ($tafel);
 
 			if(mysqli_num_rows($resultDatum) == 0)
 			{
