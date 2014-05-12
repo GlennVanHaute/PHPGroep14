@@ -1,21 +1,4 @@
-<?php
-	
-	include_once("classes/db.class.php");
-	include_once("classes/reservatie.class.php");
-	include_once("classes/Tafel.class.php");
-
-	$db = new Database();
-	$Tafel = new Tafel();
-	$Reservatie = new Reservatie();
-
-?><!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Overzicht reservaties</title>
-</head>
-<body>
-	<?php 
+<?php 
 	
 	include_once('classes/db.class.php');
 	include_once('classes/Tafel.class.php');
@@ -57,46 +40,39 @@
 	<link rel="stylesheet" href="css/slicknav.css">
 </head>
 <body>
-	<?php include_once('nav_include.php') ?>
+<?php include_once('nav_include.php') ?>
+<h1>RESERVATIE BEHEER</h1>
+	<img src="images/line.png" class="headerline" alt="line"/>
+		<section id="wrapper">
+			<h2>Zoek hier naar beschikbare tafels:</h2>
+				<section class="blok">
+					<form action="" method="post">
+						<label for="datum">Datum:</label>
+						<input type="date" for="datum" class="form-control" name="datum" required/>
 
+						<label for="uur">Uur:</label>
+						<input type="time" for="uur" class="form-control" name="uur"/>
 
-	<h1>RESERVATIE BEHEER</h1>
- 	<img src="images/line.png" class="headerline" alt="line"/>
+						<select class="select" name="aantal">
+						  <option selected disabled value="aantal personen">aantal personen</option>
+						  <option value="1">1</option>
+						  <option value="2">2</option>
+						  <option value="3">3</option>
+						  <option value="4">4</option>
+						  <option value="5">5</option>
+						  <option value="6">6</option>
+						  <option value="7">7</option>
+						  <option value="8">8</option>
+						  <option value="9">9</option>
+						  <option value="10">10</option>
+						</select>
 
-<section class="blok">
+						<input type="submit"  class="btn btn-lg btn-default" name='submitknop' value="zoeken"/>
 
-	<h2>Zoek hier naar beschikbare tafels:</h2>
-	<form action="" method="post">
-
-	<label for="datum">Datum:</label>
-	<input type="date" for="datum" class="form-control" name="datum" required/>
-
-	<label for="uur">Uur:</label>
-	<input type="time" for="uur" class="form-control" name="uur"/>
-
-	<select class="select" name="aantal">
-	  <option selected disabled value="aantal personen">aantal personen</option>
-	  <option value="1">1</option>
-	  <option value="2">2</option>
-	  <option value="3">3</option>
-	  <option value="4">4</option>
-	  <option value="5">5</option>
-	  <option value="6">6</option>
-	  <option value="7">7</option>
-	  <option value="8">8</option>
-	  <option value="9">9</option>
-	  <option value="10">10</option>
-	</select>
-
-	<input type="submit"  class="btn btn-lg btn-default" name='submitknop' value="zoeken"/>
-
-	</form>
-	</div>
-		</div>
-</section>
-
-
-	<?php 
+					</form>
+				</section>
+				
+<?php 
 	if (!empty($_POST['submitknop'])) 
 	{
 		echo "<section class='blok'>";
@@ -177,37 +153,33 @@
 		}
 		
 	}
-	 ?>
+?>
 
-</section>
 
-		<section class="blok">
-	 	<h2>Overzicht gemaakte reservaties</h2>
-	 	<ul id='overzicht'>
+				<section class="blok">
+					<h2>Overzicht gemaakte reservaties</h2>
+						<?php 
+							 $result = $Reservatie->GetAll();
+								echo "<ul>";
+								foreach ($result as $res) 
+								{
+									echo "<li class='col-xs-4 col-md-4'>";
+									//echo '<p>' GLENN PRINT HIER NAAM GEBRUIKER AF '</p>';
+									echo "<p> Tafel : " . $res['Tafelnummer']."</p>";
+									echo "<p> Gereserveerd voor " .$res['personen']." personen</p>";
+									echo "<p> Datum : " .$res['Datum']."</p>";
+									echo "<p> Uur : " .$res['Uur']."</p>";
+									
+									
+									//$resultTafel = $Tafel->GetByTafelnr();
+									
+									echo "</li>";
+								}
+								echo "</ul>";
+						?>
 
-	 <?php 
-
-	 $result = $Reservatie->GetAll();
-
-		foreach ($result as $res) 
-		{
-			echo "<li class='col-xs-4 col-md-4'>";
-			//echo '<p>' GLENN PRINT HIER NAAM GEBRUIKER AF '</p>';
-			echo "<p> Tafel : " . $res['Tafelnummer']."</p>";
-			echo "<p> Gereserveerd voor " .$res['Personen']." personen</p>";
-			echo "<p> Datum : " .$res['Datum']."</p>";
-			echo "<p> Uur : " .$res['Uur']."</p>";
-			
-			
-			//$resultTafel = $Tafel->GetByTafelnr();
-			
-			echo "</li>";
-		}
-		echo "</ul>";
-	  ?>
-
-</section>
-
+				</section>	
+		</section>
 </body>
 </html>
 
