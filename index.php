@@ -34,7 +34,7 @@
 <div class="row">
 	<div class="col-md-6">
 		<section id="contact">
-			<h2>CONTACT</h2
+			<h2>CONTACT</h2>
 			<label>Adres:</label>
 			<p>print uit databank</p>
 			<label>Telefoon:</label>
