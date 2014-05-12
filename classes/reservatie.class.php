@@ -23,11 +23,8 @@ include_once ("db.class.php");
 					{
 						$this->m_sDatum = $p_vValue;
 					}
-					else
-					{
-						throw new Exception("Gelieve de datum in te vullen");
-					}
-						break;
+
+					break;
 
 					case 'Uur':
 						$this->m_sUur = $p_vValue;
@@ -66,10 +63,10 @@ include_once ("db.class.php");
 
 			public function Reserveer()
 			{
-				echo "check functie Reserveer <br/>";
-				echo "nummer: $this->Tafelnummer  <br/>";
-				echo "datum: $this->Datum <br/>";
-				echo "uur: $this->Uur  <br/>";
+				// echo "check functie Reserveer <br/>";
+				// echo "nummer: $this->Tafelnummer  <br/>";
+				// echo "datum: $this->Datum <br/>";
+				// echo "uur: $this->Uur  <br/>";
 
 				$db = new Database();
 				$sql = "INSERT INTO reservatie (Tafelnummer, Datum, Uur) 

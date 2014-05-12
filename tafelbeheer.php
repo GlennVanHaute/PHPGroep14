@@ -19,10 +19,6 @@ if(!empty($_POST['btn_add']))
 		{
 			$nieuwtafel->opm = $_POST['opm'];
 		}
-		else 
-		{
-			$opm =" ";
-		}
 		
 		$nieuwtafel->Save();
 	}

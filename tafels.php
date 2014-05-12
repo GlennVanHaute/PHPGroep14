@@ -21,12 +21,10 @@
 
 		$Tafel->personen = $_POST['aantal'];
 		$resultTafelHoger = $Tafel->CheckAantalHoger();
-		print_r($resultTafelHoger);
-
 	}
 	
 
-	if (!empty($_POST['ressubmit'])&& !empty($_POST['aantal']) && !empty($_POST['datum']) && !empty($_POST['uur']))  
+	if (!empty($_POST['ressubmit']))  
 	{
 		$Reservatie->Tafelnummer = $_POST['restafel'];
 		$Reservatie->Datum = $_POST['resdatum'];
@@ -123,7 +121,7 @@
 <?php include_once('nav_include.php') ?>
 
 
-<h1>RESERVATIE</h1>
+<h1>RESERVATI</h1>
 <p>Kijk hier of er beschikbare tafels zijn:</p>
 <div class="container-fluid">
 <div class="row">
@@ -131,7 +129,7 @@
 <form action="" method="post">
 
 <label for="datum">Datum:</label>
-<input type="date" for="datum>" class="form-control" name="datum"/>
+<input type="date" for="datum>" class="form-control" name="datum" required/>
 
 <label for="uur">Uur:</label>
 <input type="time" for="uur>" class="form-control" name="uur"/>
@@ -180,7 +178,6 @@
 		foreach ($resultTafel as $tafel) 
 		{
 			$resultDatum = $Reservatie->CheckDatum();
-			echo ($tafel);
 
 			if(mysqli_num_rows($resultDatum) == 0)
 			{
@@ -190,7 +187,7 @@
 					  
 				if(!empty($tafel['Opmerkingen']))
 				{
-					echo "Opmerkingen: " . $tafel['Opmerkingen'];
+					echo " Opmerkingen: " . $tafel['Opmerkingen'];
 				}
 					 
 				echo "</li>";
@@ -215,8 +212,12 @@
 
 					echo "<form method='post' action='' class='huidigeres'>";
 				echo" <span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
-					  Maximum aantal personen: " . $tafel['MaxPersonen'] . "
-					  Opmerkingen: " . $tafel['Opmerkingen'];
+					  Maximum aantal personen: " . $tafel['MaxPersonen'];
+					 
+					 if(!empty($tafel['Opmerkingen']))
+					{
+					echo " Opmerkingen: " . $tafel['Opmerkingen'];
+					};
 				echo "</li>";
 				echo "<input type='hidden' name='restafel' value='" . $tafel['Tafelnummer'] . "'/>";
 				echo "<input type='hidden' name='resdatum' value='" . $Reservatie->Datum . "'/>";
@@ -248,8 +249,13 @@ if (empty($_POST))
 
 		echo "<li>";
 		echo"Tafelnummer: " . $tafel['Tafelnummer'] . "
-		Maximum aantal personen: " . $tafel['MaxPersonen'] . "
-		Opmerkingen: ".$tafel['Opmerkingen'];
+		Maximum aantal personen: " . $tafel['MaxPersonen'];
+		if(!empty($tafel['Opmerkingen']))
+		{
+			echo " Opmerkingen: " . $tafel['Opmerkingen'];
+		};
+
+
 		echo "</li>";
 	}
 }
