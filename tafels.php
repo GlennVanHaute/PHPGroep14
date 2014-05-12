@@ -180,6 +180,7 @@
 		foreach ($resultTafel as $tafel) 
 		{
 			$resultDatum = $Reservatie->CheckDatum();
+			echo ($tafel);
 
 			if(mysqli_num_rows($resultDatum) == 0)
 			{
