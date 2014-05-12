@@ -34,7 +34,7 @@ if (isset($_POST['btnSignup'])) {
 		<input type="text" name="name" placeholder="Full name"required="required" />
 		<input type="email" name="email" placeholder="Email" required="required"/>
 		<input type="password" name="password" placeholder="Password" required="required"/>
-		<input type="submit" name="btnSignup" value="Sign up for IMD Talks" />
+		<input type="submit" name="btnSignup" value="Registreer hier" />
 		</form>
 		<div id="feedback">
 			<?php
