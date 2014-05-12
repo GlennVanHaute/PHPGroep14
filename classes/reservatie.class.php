@@ -79,7 +79,7 @@ include_once ("db.class.php");
 			'".	$db->conn->real_escape_string($this->Personen)."',
 			'".	$db->conn->real_escape_string($this->Datum)."',
 			'".	$db->conn->real_escape_string($this->Uur)."')";
-				print_r($sql);
+				
 				return $db->conn->query($sql);
 			}
 
