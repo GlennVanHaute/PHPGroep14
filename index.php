@@ -19,11 +19,7 @@
 <?php include('nav_include.php') ?>
 <section id="wrapper">
 	<header>
-		<div class="row">
-			<div class="col-md-12">
-				<img src="images/logo.png" class="logo" alt="table4you"/>
-			</div>			
-		</div>
+		<img src="images/logo.png" class="logo" alt="table4you"/>
 	</header>
 
 	<section id="info">

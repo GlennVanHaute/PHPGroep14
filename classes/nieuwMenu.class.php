@@ -72,7 +72,7 @@ class nieuwMenu
 	public function getAll()
 	{
 
-		$db = new Db();
+		$db = new Database();
 		$sql = "select * from nieuwMenu";
     	return $db->conn->query($sql);
 	}

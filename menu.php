@@ -93,14 +93,14 @@
 </head>
 <body>
 
-<section id="wrapper">
-
 	<?php include('nav_include.php') ?>
+
+	<section id="wrapper">
 
 	<h1> MENU </h1>
 	<img src="images/line.png" class="headerline" alt="line"/>
 
-	<section class="menucss">
+	<section class="blok">
 	<h2>Nieuw gerecht aanmaken</h1>
 
 	<div class="status"></div>
@@ -123,7 +123,7 @@
 
 	</form>
 </section>
-<section class="menucss">
+<section class="blok">
 
 	<h2>Huidige gerechten</h1>
 	<?php 
