@@ -32,6 +32,7 @@
 
 		$Reservatie->Reserveer();
 	}
+	
 
 ?>
 
