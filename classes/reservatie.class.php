@@ -24,17 +24,16 @@ include_once ("db.class.php");
 						break;
 
 					case 'Datum':
-<<<<<<< HEAD
+
 						$this->m_sDatum = $p_vValue;					
 						break;
-=======
+
 					if (!empty($_POST['datum']) or !empty($_POST['resdatum']))
 					{
 						$this->m_sDatum = $p_vValue;
 					}
 
 					break;
->>>>>>> 5826e1da08a0be8e80ad05dd0d2450b7ff7d40c5
 
 					case 'Uur':
 						$this->m_sUur = $p_vValue;
