@@ -78,8 +78,6 @@ class Tafel
 					Opmerkingen = '".$db->conn->real_escape_string($this->opm)."'
 					WHERE Tafelnummer = '".$this->nummer."'";	
 
-					print_r($sql);
-
 		$db->conn->query($sql);
 		
 	}
