@@ -130,8 +130,8 @@
 			echo "<label for='restobtw'>BTWnummer: </label>";
 			echo "<input type='text' name='restobtw' value='".$lijstrestos['BTWnummer']."'/>";
 			echo "</li>";
-			echo "<input type='submit' name='btn_edit' value='bewerken' />";
-			echo "<input type='submit' name='btn_delete' value='verwijderen' />";
+			echo "<input type='submit' class='btn btn-lg btn-default' name='btn_edit' value='bewerken' />";
+			echo "<input type='submit' class='btn btn-lg btn-default' name='btn_delete' value='verwijderen' />";
 
 			echo "</form>";
 		}
