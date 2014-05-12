@@ -34,6 +34,8 @@ if (isset($_POST['btnLogin'])) {
 </head>
 <body>
 
+	<?php include('nav_include.php') ?>
+
 <div class="container">
 <!-- 	<nav>
 		<a href="logout.php"Logout>Logout</a>
