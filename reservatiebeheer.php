@@ -25,6 +25,7 @@
 	if (!empty($_POST['ressubmit']))  
 	{
 		$Reservatie->Tafelnummer = $_POST['restafel'];
+		$Reservatie->Personen = $_POST['resaantal'];
 		$Reservatie->Datum = $_POST['resdatum'];
 		$Reservatie->Uur = $_POST['resuur'];
 		$resultReservatie = $Reservatie->Reserveer();
@@ -128,6 +129,7 @@
 
 				echo "<input type='hidden' name='resdatum' value='" . $_POST['datum'] . "'/>";
 				echo "<input type='hidden' name='resuur' value='" . $_POST['uur'] . "'/>";
+				echo "<input type='hidden' name='resaantal' value='" . $_POST['aantal'] . "'/>";
 
 			}
 				
@@ -158,7 +160,7 @@
 
 				echo "<input type='hidden' name='resdatum' value='" . $_POST['datum'] . "'/>";
 				echo "<input type='hidden' name='resuur' value='" . $_POST['uur'] . "'/>";
-
+				echo "<input type='hidden' name='resaantal' value='" . $_POST['aantal'] . "'/>";
 			}
 	
 			
@@ -176,6 +178,7 @@
 						<?php 
 							 $result = $Reservatie->GetAll();
 								echo "<ul class='blok>'";
+
 								foreach ($result as $res) 
 								{
 									echo "<li>";
