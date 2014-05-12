@@ -47,7 +47,7 @@
 	$(document).ready(function(){
 			$("#resbevtitel").hide();
 			console.log("document ready");
-			$("#reserveerprint").on('submit', function(){
+			$("#reserveerprint").submit(function(){
 				$("#resbevtitel").show('slow');
 
 				var text = $(this).prev().text();
@@ -118,9 +118,11 @@
 <?php include_once('nav_include.php') ?>
 
 
-<h1>RESERVATI</h1>
-<p>Kijk hier of er beschikbare tafels zijn:</p>
+<h1>RESERVATIE</h1>
 <div class="container-fluid">
+
+<p>Kijk hier of er beschikbare tafels zijn:</p>
+
 <div class="row">
 <div class="col-xs-12 col-md-12">
 <form action="" method="post">

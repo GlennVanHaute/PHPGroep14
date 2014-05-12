@@ -2,8 +2,8 @@
 		
 include_once ("db.class.php");
 
-		class Reservatie
-		{
+	class Reservatie
+	{
 			private $m_iTafelnummer;
 			private $m_sDatum;
 			private $m_sUur;
@@ -53,14 +53,6 @@ include_once ("db.class.php");
 			}
 
 
-			public function CheckDatum()
-			{
-				$db = new Database();
-				$sql = "select * from reservatie where Tafelnummer='" . $this->Tafelnummer . "' and Datum ='" . $this->Datum . "';";
-				return $db->conn->query($sql);
-
-			}
-
 			public function Reserveer()
 			{
 				// echo "check functie Reserveer <br/>";
@@ -79,8 +71,22 @@ include_once ("db.class.php");
 
 			}
 
+			public function CheckDatum()
+			{
+				$db = new Database();
+				$sql = "select * from reservatie where Tafelnummer='" . $this->Tafelnummer . "' and Datum ='" . $this->Datum . "';";
+				return $db->conn->query($sql);
+			}
+
+
+			public function GetAll()
+			{
+				$db = new Database();
+				$sql = "select * from reservatie order by Tafelnummer";
+				return $db->conn->query($sql);
+			}
 			
-		}
+	}
 ?>
 
 

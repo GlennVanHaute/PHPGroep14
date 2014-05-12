@@ -1,5 +1,22 @@
 <?php
 	
+	include_once("classes/db.class.php");
+	include_once("classes/reservatie.class.php");
+	include_once("classes/Tafel.class.php");
+
+	$db = new Database();
+	$nieuwtafel = new Tafel();
+	$Reservatie = new Reservatie();
+
+?><!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Overzicht reservaties</title>
+</head>
+<body>
+	<?php 
+	
 	include_once('classes/db.class.php');
 	include_once('classes/Tafel.class.php');
 	include_once('classes/reservatie.class.php');
@@ -167,5 +184,42 @@
 		
 	}
 	 ?>
+
+
+
+	 <?php 
+	 	$result = $Reservatie->GetAll();
+
+		echo "<ul id='overzicht'>";
+		echo "<h2>Overzicht reservaties</h2>";
+
+		foreach ($result as $tafel) 
+		{
+			echo "<li class='col-xs-4 col-md-4'>";
+			//echo '<p>' GLENN PRINT HIER NAAM GEBRUIKER AF '</p>';
+			echo '<p>' .'Tafel: ' . $tafel['Tafelnummer'].'</p>';
+			echo '<p>' .'Max aantal personen: ' . $tafel['MaxPersonen'].'</p>';
+	
+			
+			echo "</li>";
+		}
+		echo "</ul>";
+	  ?>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
