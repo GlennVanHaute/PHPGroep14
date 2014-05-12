@@ -74,10 +74,10 @@
 <body>
 			<?php include('nav_include.php') ?>
 			    <h2>Maak hier een restaurant aan</h2>
-<div class="container-fluid">
 
-	<div class="row">
-		<div class="col-xs-12 col-md-12">
+
+	<section id="wrapper">
+		<section class="blok">
 			<form role="form" action="" class="omkadering" method="post">
 			  <div class="form-group">
 				
@@ -94,7 +94,8 @@
 
 			  <button type="submit" class="btn btn-lg btn-default" id="button" value="post" name="btnRestAanmaken">Slaag je gegevens op</button>
 			</form>
-			
+		</section>
+			<section class="blok">
 			<h1>Huidige resto's</h1>
 			<?php 
   		$res = $aanmaak->getAll();
@@ -143,6 +144,7 @@
 	
 	
 	
-</div>
+	</section>
+</section>
 </body>
 </html>
