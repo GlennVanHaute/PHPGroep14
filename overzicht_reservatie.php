@@ -3,7 +3,7 @@
 	include_once("classes/db.class.php");
 
 	
-		$db = new Db();
+		$db = new Database();
 		$sql = "select * from tblreservatie";
 		$result = $db->conn->query($sql);
 
