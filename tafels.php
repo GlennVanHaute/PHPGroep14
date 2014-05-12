@@ -45,6 +45,10 @@
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/slicknav.css">
+	
+</head>
+
 	<script>
 	
 	$(document).ready(function(){
@@ -117,14 +121,13 @@
 		
 </head>
 <body>
-
 <?php include_once('nav_include.php') ?>
 
 
 <h1>RESERVATI</h1>
-<div class="container-fluid">
+<section class="blok">
 
-<p>Kijk hier of er beschikbare tafels zijn:</p>
+<h2>Kijk hier of er beschikbare tafels zijn:</h2>
 
 <div class="row">
 <div class="col-xs-12 col-md-12">
@@ -187,26 +190,25 @@
 
 			foreach ($resultTafel as $tafel) 
 			{
-				echo "<input type='radio' name='restafel' value=".$tafel['Tafelnummer'].">";
-
-				echo "<div>";
+				echo "<label><input type='radio' name='restafel' value=".$tafel['Tafelnummer'].">";
 					
 					echo " Tafel ".$tafel['Tafelnummer']."
-						 <span> voor </span>".$tafel['MaxPersonen']." <span> personen.</span>";
+						 </label> <p>Tafel voor ".$tafel['MaxPersonen']." personen";
 
 					if(!empty($tafel['Opmerkingen']))
 					{
-						echo " Opmerkingen: " . $tafel['Opmerkingen'];
+						echo " <p>Opmerkingen: " . $tafel['Opmerkingen'] . "</p>";
 					};
 
-				echo "<input type='hidden' name='resdatum' value='" . $_POST['datum'] . "'/>";
+				echo "<input type='hidden' name='resdatum'  value='" . $_POST['datum'] . "'/>";
 				echo "<input type='hidden' name='resuur' value='" . $_POST['uur'] . "'/>";
-				echo "</div>";
-				echo "</br>";
+
 
 			}
 				
 			}
+						echo"<input type='submit' class='btn btn-lg btn-default'  name='ressubmit' id='reserveerprint' value='Deze tafel reserveren'/>";
+
 		}
 
 		
@@ -220,7 +222,6 @@
 			{
 				echo "<input type='radio' name='restafel' value=".$tafel['Tafelnummer'].">";
 
-				echo "<div>";
 					
 					echo " Tafel ".$tafel['Tafelnummer']."
 						 <span> voor </span>".$tafel['MaxPersonen']." <span> personen.</span>";
@@ -233,20 +234,10 @@
 				echo "<input type='hidden' name='resdatum' value='" . $_POST['datum'] . "'/>";
 				echo "<input type='hidden' name='resuur' value='" . $_POST['uur'] . "'/>";
 				echo "<input type='hidden' name='resaantal' value='" . $_POST['aantal'] . "'/>";
-				echo "</div>";
-				echo "</br>";
 
 			}
-
-			// foreach ($resultReservatie as $res) 
-			// {
-				// echo "<input type='input' name='resdatum' value='" . $_POST['datum'] . "'/>";
-				// echo "<input type='input' name='resuur' value='" . $_POST['uur'] . "'/>";
-				//echo "<p>".$res['Datum']." om ".$res['Uur']." uur.</p>";
-				
-			//}		
 			
-			echo"<INPUT type='submit' name='ressubmit' id='reserveerprint' value='Deze tafel reserveren'/>";
+			echo"<INPUT type='submit' class='btn btn-lg btn-default'  name='ressubmit' id='reserveerprint' value='Deze tafel reserveren'/>";
 			echo "</form>";
 			
 		}

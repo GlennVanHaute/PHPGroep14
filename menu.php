@@ -93,7 +93,7 @@
 </head>
 <body>
 
-	<?php include('nav_include.php') ?>
+	<?php include_once('nav_include.php') ?>
 
 	<section id="wrapper">
 
@@ -119,7 +119,7 @@
 	<br/>
 	<input type="text" id="nieuwMenuPrijs" name="nieuwMenuPrijs" >
 	<br/>
-	<input name="btnMenuAanmaken" type="submit" value="Gerecht aanmaken" />
+	<input name="btnMenuAanmaken" class='btn btn-lg btn-default' type="submit" value="Gerecht aanmaken" />
 
 	</form>
 </section>
@@ -145,8 +145,8 @@
 			echo "<label for='gerechtprijs'>Prijs: </label>";
 			echo "<input type='text' name='gerechtprijs' value='".$lijstmenu['Prijs']."'/>";
 			echo "</li>";
-			echo "<input type='submit' name='btn_edit' value='bewerken' />";
-			echo "<input type='submit' name='btn_delete' value='verwijderen' />";
+			echo "<input type='submit' class='btn btn-lg btn-default' name='btn_edit' value='bewerken' />";
+			echo "<input type='submit' class='btn btn-lg btn-default' name='btn_delete' value='verwijderen' />";
 
 			echo "</form>";
 		}

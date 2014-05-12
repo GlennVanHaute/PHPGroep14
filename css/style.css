@@ -13,7 +13,7 @@ margin-right: auto;
 
 h1{
 	text-align:center;
-	font-size:80px;
+	font-size:60px;
 	margin-top:50px;
 	font-weight: bold;
 	color:black;
@@ -69,12 +69,35 @@ input[type='text']{
 	width:90%;
 	}
 
+select{
+	display: block;
+}
+
 input[type='submit']{
-	width:44%;
+	width:100%;
+	max-width: 300px;
 	margin-right: 10px;
 	margin-top: 5px;
 
 
+}
+
+
+/* MENU PAGINA'S */
+.menuopm{
+	text-align:center;
+	font-size: 25px;
+	margin-bottom:50px;
+}
+
+/* RESERVATIE / TAFELS */
+
+.marginb{
+	margin-top: 70px;
+}
+
+input[type='radio']{
+margin-top: 20px;
 }
 
 

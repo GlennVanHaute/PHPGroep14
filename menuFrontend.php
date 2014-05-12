@@ -46,7 +46,7 @@
 			{
 				//echo "<form>";
 				echo "<h2>".$lijstmenu['Naam']." - €".$lijstmenu['Prijs']."</h2>";
-				echo "<p> Opmerking: ".$lijstmenu['Details']."</p>";
+				echo "<p class='menuopm'> ".$lijstmenu['Details']."</p>";
 				//echo "</form>";
 			}
 			

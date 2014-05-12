@@ -96,7 +96,7 @@ if(!empty($_POST['btn_delete']))
 		<label for="opm" required >Opmerkingen:</label>
 		<input type="text" name="opm" placeholder="familietafel, aan het raam ..." />	
 
-		<input type="submit" name="btn_add" value="toevoegen" />
+		<input type="submit" class='btn btn-lg btn-default' name="btn_add" value="toevoegen" />
 	</form>
 
 </section>
@@ -120,8 +120,8 @@ if(!empty($_POST['btn_delete']))
 		<label>Opmerkingen:</label><input type='text' name='opmerkingen' value='" . 
 		$tafel['Opmerkingen'] . "'/>";
 		
-		echo "<input type='submit' name='btn_edit' value='bewerken' />";
-		echo "<input type='submit' name='btn_delete' value='delete' />";
+		echo "<input class='btn btn-lg btn-default'  type='submit' name='btn_edit' value='bewerken' />";
+		echo "<input class='btn btn-lg btn-default' type='submit' name='btn_delete' value='delete' />";
 		echo "</form>";
 
 	}
