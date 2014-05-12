@@ -66,6 +66,7 @@ class nieuwMenu
 		
 		
 		return $db->conn->query($sql);
+		print_r($sql);
 	}
 
 	public function getAll()
@@ -94,16 +95,13 @@ class nieuwMenu
 					WHERE id = '".$this->id."'";	
 
 		$db->conn->query($sql);
+		print_r($sql);
 
 	}
 
 	public function Delete()
 	{
-<<<<<<< HEAD
 		$db = new Database();
-=======
-		$db = new Databank();
->>>>>>> 5826e1da08a0be8e80ad05dd0d2450b7ff7d40c5
 		$sql = "DELETE FROM nieuwMenu
 				WHERE id = '".$this->id."'
 				";
@@ -112,11 +110,7 @@ class nieuwMenu
 
 	public function Check()
 		{
-<<<<<<< HEAD
 			$db = new Database();
-=======
-			$db = new databank();
->>>>>>> 5826e1da08a0be8e80ad05dd0d2450b7ff7d40c5
 			$sql = "SELECT * FROM nieuwMenu WHERE Naam = '".$this->naam."';";
 			$result = $db->conn->query($sql);
 			//print_r($sql);
