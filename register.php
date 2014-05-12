@@ -1,7 +1,5 @@
 <?php 
 include_once("classes/User.class.php");
-include_once('classes/db.class.php');
-
 if (isset($_POST['btnSignup'])) {
 	try{
 	$user = new User();
@@ -9,33 +7,6 @@ if (isset($_POST['btnSignup'])) {
 	$user->Name = $_POST['naam'];
 	$user->Email = $_POST['email'];
 	$user->Password = $_POST['password'];
-<<<<<<< HEAD
-	$available = $user->EmailAvailable();
-		if($available == true){
-			$user -> Register();
-			if(isset($user->errors) && !empty($user->errors))
-			{
-				if(isset($user->errors['errorCreate']))
-				{
-					$error = $user->errors['errorCreate'];
-				}
-			}
-			else
-			{
-				$feedback = $user->feedbacks['Signedup'];
-			}
-		}
-		else
-		{
-			if(isset($user->errors) && !empty($user->errors))
-			{
-				if(isset($user->errors['errorAvailable']))
-				{
-					$error = $user->errors['errorAvailable'];
-				}
-			}
-		}
-=======
 	$user -> Register();
 	// $available = $user->EmailAvailable();
 	// 	if($available == true){
@@ -62,7 +33,6 @@ if (isset($_POST['btnSignup'])) {
 	// 			}
 	// 		}
 	// 	}
->>>>>>> FETCH_HEAD
 		
 	
 	}catch (Exception $e)
