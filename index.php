@@ -36,7 +36,7 @@
 		<section id="contact">
 			<h2>CONTACT</h2>
 			<label>Adres:</label>
-			<p>print uit databank</p>
+			<p></p>
 			<label>Telefoon:</label>
 			<p>print uit databank</p>
 			<label>Email adres:</label>
@@ -49,7 +49,7 @@
 <div class="row">
 	<div class="col-md-6">
 	<section id="Openingsuren">
-		<h2>OPENINGSUREN</h2
+		<h2>OPENINGSUREN</h2>
 		<label>Maandag:</label>
 		<p>print uit databank</p>
 		<label>Dinsdag:</label>
