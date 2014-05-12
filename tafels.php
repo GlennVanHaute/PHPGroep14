@@ -54,14 +54,23 @@
 	$(document).ready(function(){
 			$("#resbevtitel").hide();
 			console.log("document ready");
-			$("#reserveerprint").submit(function(){
-				$("#resbevtitel").show('slow');
+			$(".huidigeres").submit(function(event){
+				var resultaat = $('#radio').is(':checked');
 
-				var text = $(this).prev().text();
-				$("#resbev").text(text);
+					$("#resbevtitel").show('slow');
 
-				$("#reserveer").hide('slow');
+					var text = $("input[@name=restafel]:checked").val();
+					$("#resbev").html('<p> Tafel ' + text);
+
+					$("#reserveer").hide('slow');
+			
+
+				
+
+				event.preventDefault();
 			});
+
+	});
 	
 
   function statusChangeCallback(response) {
@@ -115,7 +124,6 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 
-});
 
 </script>
 		
@@ -124,7 +132,8 @@
 <?php include_once('nav_include.php') ?>
 
 
-<h1>RESERVATI</h1>
+<h1>RESERVATIE</h1>
+<img src="images/line.png" class="headerline" alt="line"/>
 <section class="blok">
 
 <h2>Kijk hier of er beschikbare tafels zijn:</h2>
@@ -190,7 +199,8 @@
 
 			foreach ($resultTafel as $tafel) 
 			{
-				echo "<label><h3><input type='radio' name='restafel' value=".$tafel['Tafelnummer'].">";
+
+				echo "<label><h3><input type='radio' id='radio' name='restafel' value=".$tafel['Tafelnummer'].">";
 					
 					echo " Tafel ".$tafel['Tafelnummer']."</h3>
 						 </label> <p>Tafel voor ".$tafel['MaxPersonen']." personen</p>";
@@ -208,7 +218,8 @@
 			}
 				
 			}
-						echo"<input type='submit' class='btn btn-lg btn-default'  name='ressubmit' id='reserveerprint' value='Deze tafel reserveren'/>";
+						
+		echo"<input type='submit' class='btn btn-lg btn-default'  name='ressubmit' id='reserveerprint' value='Deze tafel reserveren'/>";
 
 		}
 
@@ -221,7 +232,7 @@
 
 			foreach ($resultTafelHoger as $tafel) 
 			{
-					echo "<label><h3><input type='radio' name='restafel' value=".$tafel['Tafelnummer'].">";
+					echo "<label><h3><input type='radio' id='radio' name='restafel' value=".$tafel['Tafelnummer'].">";
 					
 					echo " Tafel ".$tafel['Tafelnummer']."</h3>
 						 </label> <p>Tafel voor ".$tafel['MaxPersonen']." personen";
