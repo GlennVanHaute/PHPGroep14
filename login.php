@@ -1,6 +1,6 @@
 <?php 
 
-include("classes/User.class.php");
+include_once("classes/User.class.php");
 if (isset($_POST['btnSignup'])) {
 	try{
 	$user = new User();
@@ -44,7 +44,7 @@ if (isset($_POST['btnLoginHouder'])) {
 </head>
 <body>
 
-	<?php include('nav_include.php') ?>
+	<?php include_once('nav_include.php') ?>
 
 <div class="container">
 <!-- 	<nav>

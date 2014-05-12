@@ -52,16 +52,20 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Overzicht reservaties</title>
+	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/slicknav.css">
 </head>
 <body>
 	<?php include_once('nav_include.php') ?>
 
 
-	<h1>RESERVATIES RESTAURANTHOUDER</h1>
-	<p>Kijk hier of er beschikbare tafels zijn:</p>
-	<div class="container-fluid">
-	<div class="row">
-	<div class="col-xs-12 col-md-12">
+	<h1>RESERVATIE BEHEER</h1>
+ 	<img src="images/line.png" class="headerline" alt="line"/>
+
+<section class="blok">
+
+	<h2>Zoek hier naar beschikbare tafels:</h2>
 	<form action="" method="post">
 
 	<label for="datum">Datum:</label>
@@ -89,11 +93,13 @@
 	</form>
 	</div>
 		</div>
+</section>
+
 
 	<?php 
 	if (!empty($_POST['submitknop'])) 
 	{
-
+		echo "<section class='blok'>";
 		echo "<h2> Reserveerbare tafels van " . $_POST['aantal'] . " personen op " . $_POST['datum'] . ":</h2>";
 
 		
@@ -119,79 +125,67 @@
 
 			foreach ($resultTafel as $tafel) 
 			{
-				echo "<input type='radio' name='restafel' value=".$tafel['Tafelnummer'].">";
-
-				echo "<div>";
+				echo "<label><input type='radio' name='restafel' value=".$tafel['Tafelnummer'].">";
 					
 					echo " Tafel ".$tafel['Tafelnummer']."
-						 <span> voor </span>".$tafel['MaxPersonen']." <span> personen.</span>";
+						 </label> <p>Tafel voor ".$tafel['MaxPersonen']." personen";
 
 					if(!empty($tafel['Opmerkingen']))
 					{
-						echo " Opmerkingen: " . $tafel['Opmerkingen'];
+						echo " <p>Opmerkingen: " . $tafel['Opmerkingen'] . "</p>";
 					};
 
 				echo "<input type='hidden' name='resdatum' value='" . $_POST['datum'] . "'/>";
 				echo "<input type='hidden' name='resuur' value='" . $_POST['uur'] . "'/>";
-				echo "</div>";
-				echo "</br>";
 
 			}
 				
 			}
+				echo"<INPUT type='submit' class='btn btn-lg btn-default' name='ressubmit' id='reserveerprint' value='Deze tafel reserveren'/>";
 		}
+		
+
 
 		
 		if(mysqli_num_rows($resultTafelHoger) !=0)
 		{
-			echo "<h2> Tafels die u ook kan reserveren:</h2>";
+			echo "<h2 class='marginb'> Tafels die u ook kan reserveren:</h2>";
 
 			echo "<form method='post' action='' class='huidigeres'>";
 
 			foreach ($resultTafelHoger as $tafel) 
 			{
-				echo "<input type='radio' name='restafel' value=".$tafel['Tafelnummer'].">";
-
-				echo "<div>";
+				echo "<label><input type='radio' name='restafel' value=".$tafel['Tafelnummer'].">";
 					
 					echo " Tafel ".$tafel['Tafelnummer']."
-						 <span> voor </span>".$tafel['MaxPersonen']." <span> personen.</span>";
+						 </label> <p>Tafel voor ".$tafel['MaxPersonen']." personen</p>";
 
 					if(!empty($tafel['Opmerkingen']))
 					{
-						echo " Opmerkingen: " . $tafel['Opmerkingen'];
+						echo " <p>Opmerkingen: " . $tafel['Opmerkingen'] . "</p>";
 					};
 
 				echo "<input type='hidden' name='resdatum' value='" . $_POST['datum'] . "'/>";
 				echo "<input type='hidden' name='resuur' value='" . $_POST['uur'] . "'/>";
-				echo "</div>";
-				echo "</br>";
 
 			}
-
-			// foreach ($resultReservatie as $res) 
-			// {
-				// echo "<input type='input' name='resdatum' value='" . $_POST['datum'] . "'/>";
-				// echo "<input type='input' name='resuur' value='" . $_POST['uur'] . "'/>";
-				//echo "<p>".$res['Datum']." om ".$res['Uur']." uur.</p>";
-				
-			//}		
+	
 			
-			echo"<INPUT type='submit' name='ressubmit' id='reserveerprint' value='Deze tafel reserveren'/>";
-			echo "</form>";
+			echo"<br/><INPUT type='submit' class='btn btn-lg btn-default' name='ressubmit' id='reserveerprint' value='Deze tafel reserveren'/>";
+			
 			
 		}
 		
 	}
 	 ?>
 
+</section>
 
+		<section class="blok">
+	 	<h2>Overzicht gemaakte reservaties</h2>
+	 	<ul id='overzicht'>
 
 	 <?php 
-	 	$result = $Reservatie->GetAll();
-
-		echo "<ul id='overzicht'>";
-		echo "<h2>Overzicht reservaties</h2>";
 
 		foreach ($result as $res) 
 		{
@@ -209,6 +203,9 @@
 		}
 		echo "</ul>";
 	  ?>
+
+</section>
+
 </body>
 </html>
 

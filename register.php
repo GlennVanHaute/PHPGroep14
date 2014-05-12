@@ -1,5 +1,5 @@
 <?php 
-include("classes/User.class.php");
+include_once("classes/User.class.php");
 if (isset($_POST['btnSignup'])) {
 	try{
 	$user = new User();
