@@ -76,6 +76,12 @@ include_once ("db.class.php");
 
 			}
 
+			public function GetAll()
+			{
+				$db = new Database();
+				$sql = "select * from reservatie order by Tafelnummer";
+				return $db->conn->query($sql);
+			}
 			
 		}
 ?>
