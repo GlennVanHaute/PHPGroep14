@@ -5,7 +5,7 @@
 	include_once("classes/Tafel.class.php");
 
 	$db = new Database();
-	$nieuwtafel = new Tafel();
+	$Tafel = new Tafel();
 	$Reservatie = new Reservatie();
 
 ?><!doctype html>
@@ -193,13 +193,15 @@
 		echo "<ul id='overzicht'>";
 		echo "<h2>Overzicht reservaties</h2>";
 
-		foreach ($result as $tafel) 
+		foreach ($result as $res) 
 		{
 			echo "<li class='col-xs-4 col-md-4'>";
 			//echo '<p>' GLENN PRINT HIER NAAM GEBRUIKER AF '</p>';
-			echo '<p>' .'Tafel: ' . $tafel['Tafelnummer'].'</p>';
-			echo '<p>' .'Max aantal personen: ' . $tafel['MaxPersonen'].'</p>';
-	
+			echo "<p> Tafel: " . $res['Tafelnummer']."</p>";
+			echo "<p> Datum: " .$res['Datum']."</p>";
+			echo "<p> Uur: " .$res['Uur']."</p>";
+			
+			$resultTafel = $Tafel->GetByTafelnr();
 			
 			echo "</li>";
 		}
