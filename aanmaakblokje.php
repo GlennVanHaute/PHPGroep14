@@ -92,7 +92,7 @@
 				
 			  </div>
 
-			  <button type="submit" class="btn btn-lg btn-default" id="button" value="post" name="btnRestAanmaken">Slaag je gegevens op</button>
+			  <button type="submit" class="btn btn-lg btn-default" id="button" value="post" name="btnRestAanmaken">Sla je gegevens op</button>
 			</form>
 		</section>
 			<section class="blok">
