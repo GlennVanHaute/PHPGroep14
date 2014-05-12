@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.12
+-- version 3.3.10.4
 -- http://www.phpmyadmin.net
 --
--- Host: localhost:8889
--- Generation Time: May 08, 2014 at 10:12 PM
--- Server version: 5.5.34
--- PHP Version: 5.5.10
+-- Machine: mysql.dorienthys.com
+-- Genereertijd: 12 Mei 2014 om 03:15
+-- Serverversie: 5.1.53
+-- PHP-Versie: 5.3.27
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -23,19 +22,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tafelbeheer`
+-- Tabelstructuur voor tabel `tafelbeheer`
 --
 
-CREATE TABLE `tafelbeheer` (
+CREATE TABLE IF NOT EXISTS `tafelbeheer` (
   `ID` int(5) NOT NULL AUTO_INCREMENT,
   `Tafelnummer` varchar(5) NOT NULL,
   `MaxPersonen` int(5) NOT NULL,
-  `Opmerkingen` varchar(250) NOT NULL,
+  `Opmerkingen` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
--- Dumping data for table `tafelbeheer`
+-- Gegevens worden uitgevoerd voor tabel `tafelbeheer`
 --
 
 INSERT INTO `tafelbeheer` (`ID`, `Tafelnummer`, `MaxPersonen`, `Opmerkingen`) VALUES
@@ -46,7 +45,3 @@ INSERT INTO `tafelbeheer` (`ID`, `Tafelnummer`, `MaxPersonen`, `Opmerkingen`) VA
 (6, '4', 4, ' '),
 (7, '5', 2, ' '),
 (8, '6', 4, 'aan het raam');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

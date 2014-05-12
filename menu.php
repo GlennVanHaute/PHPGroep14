@@ -54,7 +54,9 @@
 <head>
 	<meta charset="UTF-8">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	
+	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/slicknav.css">
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$("#nieuwMenu").on('keyup', function(){
@@ -90,7 +92,16 @@
 	<title>Menu</title>
 </head>
 <body>
-	<h1>Nieuw gerecht aanmaken</h1>
+
+	<?php include('nav_include.php') ?>
+
+	<section id="wrapper">
+
+	<h1> MENU </h1>
+	<img src="images/line.png" class="headerline" alt="line"/>
+
+	<section class="blok">
+	<h2>Nieuw gerecht aanmaken</h1>
 
 	<div class="status"></div>
 
@@ -111,9 +122,10 @@
 	<input name="btnMenuAanmaken" type="submit" value="Gerecht aanmaken" />
 
 	</form>
+</section>
+<section class="blok">
 
-
-	<h1>Huidige gerechten</h1>
+	<h2>Huidige gerechten</h1>
 	<?php 
   		$res = $nieuwMenu->getAll();
 
@@ -121,6 +133,7 @@
 		while($lijstmenu = $res->fetch_assoc())
 		{
 			echo "<form action='' method='post'>";
+			echo "<h3>" . $lijstmenu['Naam'] . "</h3>";
 			echo "<li>";
 			echo "<input type='hidden' name='gerechtid' value='".$lijstmenu['id']."'/>";
 			echo "<label for='gerechtnaam'>Naam: </label>";
@@ -141,7 +154,7 @@
 	?>	
 	
 	
-
-		
+</section>
+</section>		
 </body>
 </html>
