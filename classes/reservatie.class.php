@@ -82,9 +82,6 @@ include_once ("db.class.php");
 			'".	$db->conn->real_escape_string($this->Uur)."')";
 				print_r($sql);
 				return $db->conn->query($sql);
-
-<<<<<<< HEAD
-=======
 			}
 
 			public function CheckDatum()
@@ -92,7 +89,6 @@ include_once ("db.class.php");
 				$db = new Database();
 				$sql = "select * from reservatie where Tafelnummer='" . $this->Tafelnummer . "' and Datum ='" . $this->Datum . "';";
 				return $db->conn->query($sql);
->>>>>>> FETCH_HEAD
 			}
 
 
