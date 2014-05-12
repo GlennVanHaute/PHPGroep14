@@ -1,6 +1,7 @@
 <?php
 	include('../classes/User.class.php');
 
+
 	$u = new User();
 	if(!empty($_POST['email']))
 	{
