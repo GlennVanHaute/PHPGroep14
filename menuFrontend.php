@@ -8,7 +8,9 @@
  <html lang="en">
  <head>
  	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
- 	
+	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/slicknav.css">
  	<script type="text/javascript">	
  	$(document).ready(function(){
  		$('.target').change(function(){
@@ -26,7 +28,16 @@
  	<title>Menukaart</title>
  </head>
  <body>
- 	<h1>Menukaart</h1>
+
+
+
+ 	<?php include('nav_include.php') ?>
+
+ <section id="wrapper">
+ 	<h1>MENU</h1>
+ 	<img src="images/line.png" class="headerline" alt="line"/>
+	
+	<section class="blok">
  	<?php 
 	$res = $nieuwMenu->getAll();
 
@@ -34,17 +45,15 @@
 			while($lijstmenu = $res->fetch_assoc())
 			{
 				//echo "<form>";
-				//echo "<input type='hidden' name='gerechtid' value='".$lijstmenu['id']."'/>";
-				echo "<h2>".$lijstmenu['Naam']."</h2>";
-				echo "<p>".$lijstmenu['Details']."</p>";
-				echo "<p>€ ".$lijstmenu['Prijs']."</p>";
-				echo "</br>";
+				echo "<h2>".$lijstmenu['Naam']." - €".$lijstmenu['Prijs']."</h2>";
+				echo "<p> Opmerking: ".$lijstmenu['Details']."</p>";
 				//echo "</form>";
 			}
 			
 
  	 ?>
  	
- 	
+ 	</section>
+</section>
  </body>
  </html>

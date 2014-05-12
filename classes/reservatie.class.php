@@ -2,8 +2,8 @@
 		
 include_once ("db.class.php");
 
-		class Reservatie
-		{
+	class Reservatie
+	{
 			private $m_iTafelnummer;
 			private $m_iPersonen;
 			private $m_sDatum;
@@ -24,8 +24,17 @@ include_once ("db.class.php");
 						break;
 
 					case 'Datum':
+<<<<<<< HEAD
 						$this->m_sDatum = $p_vValue;					
 						break;
+=======
+					if (!empty($_POST['datum']) or !empty($_POST['resdatum']))
+					{
+						$this->m_sDatum = $p_vValue;
+					}
+
+					break;
+>>>>>>> 5826e1da08a0be8e80ad05dd0d2450b7ff7d40c5
 
 					case 'Uur':
 						$this->m_sUur = $p_vValue;
@@ -58,14 +67,6 @@ include_once ("db.class.php");
 			}
 
 
-			public function CheckDatum()
-			{
-				$db = new Database();
-				$sql = "select * from reservatie where Tafelnummer='" . $this->Tafelnummer . "' and Datum ='" . $this->Datum . "';";
-				return $db->conn->query($sql);
-
-			}
-
 			public function Reserveer()
 			{
 				// echo "check functie Reserveer <br/>";
@@ -83,7 +84,18 @@ include_once ("db.class.php");
 				print_r($sql);
 				return $db->conn->query($sql);
 
+<<<<<<< HEAD
+=======
 			}
+
+			public function CheckDatum()
+			{
+				$db = new Database();
+				$sql = "select * from reservatie where Tafelnummer='" . $this->Tafelnummer . "' and Datum ='" . $this->Datum . "';";
+				return $db->conn->query($sql);
+>>>>>>> FETCH_HEAD
+			}
+
 
 			public function GetAll()
 			{
@@ -92,7 +104,7 @@ include_once ("db.class.php");
 				return $db->conn->query($sql);
 			}
 			
-		}
+	}
 ?>
 
 
