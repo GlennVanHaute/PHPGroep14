@@ -63,9 +63,6 @@
 					$("#resbev").html('<p> Tafel ' + text);
 
 					$("#reserveer").hide('slow');
-			
-
-				
 
 				event.preventDefault();
 			});
