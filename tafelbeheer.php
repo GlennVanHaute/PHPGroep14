@@ -69,40 +69,21 @@ if(!empty($_POST['btn_delete']))
 <head>
 	<meta charset="UTF-8">
 	<title>Tafelbeheer (backend)</title>
-		<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/slicknav.css">
 	
 </head>
 <body>
+<?php include_once('nav_include.php') ?>
 
-<h1>BESTAANDE TAFELS BEHEREN</h1>
-<?php 
-	echo $feedback;
+<section id="wrapper">
 
-	$result = $nieuwtafel->GetAll();
+	<h1>TAFELS</h1>
+	<img src="images/line.png" class="headerline" alt="line"/>
 
-	echo "<ul id='tafels'>";
-
-	while($tafel = $result->fetch_assoc()) 
-	{
-		echo "<form action='' method='post'>";
-		echo "<span> Tafelnummer: " . $tafel['Tafelnummer'] . "<input type='hidden' name='tafelnr' value='" .
-		$tafel['Tafelnummer'] ."'/> </span></span>
-		Maximum aantal personen: <input type='text' name='personen' value='" .
-		$tafel['MaxPersonen'] . "'/>
-		Opmerkingen: <input type='text' name='opmerkingen' value='" . 
-		$tafel['Opmerkingen'] . "'/>";
-		
-		echo "<input type='submit' name='btn_edit' value='bewerken' />";
-		echo "<input type='submit' name='btn_delete' value='delete' />";
-		echo "</form>";
-
-	}
-		
-
-?>
-
-
-<h1>NIEUWE TAFEL TOEVOEGEN</h1>
+	<section class="blok">
+<h2>NIEUWE TAFEL TOEVOEGEN</h1>
 
 	<form action="" method="post">
 		
@@ -118,6 +99,37 @@ if(!empty($_POST['btn_delete']))
 		<input type="submit" name="btn_add" value="toevoegen" />
 	</form>
 
-	
+</section>
+
+<section class="blok">
+<h2>BESTAANDE TAFELS BEHEREN</h1>
+<?php 
+	echo $feedback;
+
+	$result = $nieuwtafel->GetAll();
+
+	echo "<ul id='tafels'>";
+
+	while($tafel = $result->fetch_assoc()) 
+	{
+		echo "<form action='' method='post'>";
+		echo "<label><h3>Tafel " . $tafel['Tafelnummer'] . "</h3></label><input type='hidden' name='tafelnr' value='" .
+		$tafel['Tafelnummer'] ."'/>
+		<label>Maximum aantal personen:</label> <input type='text' name='personen' value='" .
+		$tafel['MaxPersonen'] . "'/>
+		<label>Opmerkingen:</label><input type='text' name='opmerkingen' value='" . 
+		$tafel['Opmerkingen'] . "'/>";
+		
+		echo "<input type='submit' name='btn_edit' value='bewerken' />";
+		echo "<input type='submit' name='btn_delete' value='delete' />";
+		echo "</form>";
+
+	}
+		
+
+?>
+</section>
+
+</section>
 </body>
 </html>

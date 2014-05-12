@@ -37,7 +37,7 @@
  	<h1>MENU</h1>
  	<img src="images/line.png" class="headerline" alt="line"/>
 	
-	<section class="menucss">
+	<section class="blok">
  	<?php 
 	$res = $nieuwMenu->getAll();
 
@@ -45,11 +45,8 @@
 			while($lijstmenu = $res->fetch_assoc())
 			{
 				//echo "<form>";
-				//echo "<input type='hidden' name='gerechtid' value='".$lijstmenu['id']."'/>";
-				echo "<h2>".$lijstmenu['Naam']."</h2>";
-				echo "<p>".$lijstmenu['Details']."</p>";
-				echo "<p>€ ".$lijstmenu['Prijs']."</p>";
-				echo "</br>";
+				echo "<h2>".$lijstmenu['Naam']." - €".$lijstmenu['Prijs']."</h2>";
+				echo "<p> Opmerking: ".$lijstmenu['Details']."</p>";
 				//echo "</form>";
 			}
 			
