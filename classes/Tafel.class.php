@@ -117,12 +117,6 @@ class Tafel
 		return $db->conn->query($sql);
 	}
 
-	public function GetByTafelnr()
-	{
-		$db = new Database();
-		$sql = "select * from tafelbeheer where Tafelnummer ='". $this->nummer."' order by Tafelnummer";
-    	return $db->conn->query($sql);
-	}
 	
 }
 
