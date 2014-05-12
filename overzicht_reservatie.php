@@ -198,7 +198,7 @@
 			echo "<li class='col-xs-4 col-md-4'>";
 			//echo '<p>' GLENN PRINT HIER NAAM GEBRUIKER AF '</p>';
 			echo "<p> Tafel : " . $res['Tafelnummer']."</p>";
-			echo "<p>" .$res['Personen']." personen</p>";
+			echo "<p> Gereserveerd voor " .$res['Personen']." personen</p>";
 			echo "<p> Datum : " .$res['Datum']."</p>";
 			echo "<p> Uur : " .$res['Uur']."</p>";
 			
