@@ -19,7 +19,7 @@ include_once ("db.class.php");
 						break;
 
 					case 'Datum':
-					if (!empty($_POST['datum']))
+					if (!empty($_POST['datum']) or !empty($_POST['resdatum']))
 					{
 						$this->m_sDatum = $p_vValue;
 					}
@@ -74,9 +74,8 @@ include_once ("db.class.php");
 			'".	$db->conn->real_escape_string($this->Tafelnummer)."',
 			'".	$db->conn->real_escape_string($this->Datum)."',
 			'".	$db->conn->real_escape_string($this->Uur)."')";
+				print_r($sql);
 				return $db->conn->query($sql);
-
-				echo "$sql";
 
 			}
 
