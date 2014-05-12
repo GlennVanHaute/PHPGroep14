@@ -70,12 +70,12 @@
       // window.location.replace("tafels.php");
       
     } else if (response.status === 'not_authorized') {
-
+// window.location.replace("login.php");
       document.getElementById('status').innerHTML = 'Please log ' +
        'into this app.';
 
     } else {
-
+// window.location.replace("login.php");
       document.getElementById('status').innerHTML = 'Please log ' +
         'into Facebook.';
 
