@@ -131,7 +131,7 @@
 <form action="" method="post">
 
 <label for="datum">Datum:</label>
-<input type="date" for="datum>" class="form-control" name="datum"/>
+<input type="date" for="datum>" class="form-control" name="datum" required/>
 
 <label for="uur">Uur:</label>
 <input type="time" for="uur>" class="form-control" name="uur"/>
@@ -190,7 +190,7 @@
 					  
 				if(!empty($tafel['Opmerkingen']))
 				{
-					echo "Opmerkingen: " . $tafel['Opmerkingen'];
+					echo " Opmerkingen: " . $tafel['Opmerkingen'];
 				}
 					 
 				echo "</li>";
@@ -215,8 +215,12 @@
 
 					echo "<form method='post' action='' class='huidigeres'>";
 				echo" <span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
-					  Maximum aantal personen: " . $tafel['MaxPersonen'] . "
-					  Opmerkingen: " . $tafel['Opmerkingen'];
+					  Maximum aantal personen: " . $tafel['MaxPersonen'];
+					 
+					 if(!empty($tafel['Opmerkingen']))
+					{
+					echo " Opmerkingen: " . $tafel['Opmerkingen'];
+					};
 				echo "</li>";
 				echo "<input type='hidden' name='restafel' value='" . $tafel['Tafelnummer'] . "'/>";
 				echo "<input type='hidden' name='resdatum' value='" . $Reservatie->Datum . "'/>";
@@ -248,8 +252,13 @@ if (empty($_POST))
 
 		echo "<li>";
 		echo"Tafelnummer: " . $tafel['Tafelnummer'] . "
-		Maximum aantal personen: " . $tafel['MaxPersonen'] . "
-		Opmerkingen: ".$tafel['Opmerkingen'];
+		Maximum aantal personen: " . $tafel['MaxPersonen'];
+		if(!empty($tafel['Opmerkingen']))
+		{
+			echo " Opmerkingen: " . $tafel['Opmerkingen'];
+		};
+
+
 		echo "</li>";
 	}
 }
