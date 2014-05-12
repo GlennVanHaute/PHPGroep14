@@ -30,6 +30,21 @@
 		$resultReservatie = $Reservatie->Reserveer();
 	}
 
+	if(!empty($_POST['btn_delete']))
+	{
+		try
+		{	
+			$Reservatie->Tafelnummer = $_POST['tafelnr'];
+			$Reservatie->Delete();
+		}
+	
+		catch (Exception $e) 
+		{
+			$feedback = $e->getMessage();
+		}
+
+	}
+
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -166,10 +181,14 @@
 									echo "<li class='col-xs-4 col-md-4'>";
 									//echo '<p>' GLENN PRINT HIER NAAM GEBRUIKER AF '</p>';
 									echo "<p> Tafel : " . $res['Tafelnummer']."</p>";
-									echo "<p> Gereserveerd voor " .$res['personen']." personen</p>";
+									echo "<p> Gereserveerd voor " .$res['Personen']." personen</p>";
 									echo "<p> Datum : " .$res['Datum']."</p>";
 									echo "<p> Uur : " .$res['Uur']."</p>";
-									
+
+									echo "<form action='' method='post'>";
+									echo "<input type='hidden' name='tafelnr' value='" .$res['Tafelnummer'] ."'/>";
+									echo "<input class='btn btn-lg btn-default' type='submit' name='btn_delete' value='Verwijder reservatie' />";
+									echo "</form>";
 									
 									//$resultTafel = $Tafel->GetByTafelnr();
 									
