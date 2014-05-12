@@ -201,7 +201,7 @@
 			echo "<p> Datum: " .$res['Datum']."</p>";
 			echo "<p> Uur: " .$res['Uur']."</p>";
 			
-			$resultTafel = $Tafel->GetByTafelnr();
+			//$resultTafel = $Tafel->GetByTafelnr();
 			
 			echo "</li>";
 		}

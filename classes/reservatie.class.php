@@ -2,8 +2,8 @@
 		
 include_once ("db.class.php");
 
-	class Reservatie
-	{
+		class Reservatie
+		{
 			private $m_iTafelnummer;
 			private $m_sDatum;
 			private $m_sUur;
@@ -19,12 +19,8 @@ include_once ("db.class.php");
 						break;
 
 					case 'Datum':
-					if (!empty($_POST['datum']) or !empty($_POST['resdatum']))
-					{
-						$this->m_sDatum = $p_vValue;
-					}
-
-					break;
+						$this->m_sDatum = $p_vValue;					
+						break;
 
 					case 'Uur':
 						$this->m_sUur = $p_vValue;
@@ -53,12 +49,20 @@ include_once ("db.class.php");
 			}
 
 
+			public function CheckDatum()
+			{
+				$db = new Database();
+				$sql = "select * from reservatie where Tafelnummer='" . $this->Tafelnummer . "' and Datum ='" . $this->Datum . "';";
+				return $db->conn->query($sql);
+
+			}
+
 			public function Reserveer()
 			{
-				// echo "check functie Reserveer <br/>";
-				// echo "nummer: $this->Tafelnummer  <br/>";
-				// echo "datum: $this->Datum <br/>";
-				// echo "uur: $this->Uur  <br/>";
+				echo "check functie Reserveer <br/>";
+				echo "nummer: $this->Tafelnummer  <br/>";
+				echo "datum: $this->Datum <br/>";
+				echo "uur: $this->Uur  <br/>";
 
 				$db = new Database();
 				$sql = "INSERT INTO reservatie (Tafelnummer, Datum, Uur) 
@@ -66,18 +70,11 @@ include_once ("db.class.php");
 			'".	$db->conn->real_escape_string($this->Tafelnummer)."',
 			'".	$db->conn->real_escape_string($this->Datum)."',
 			'".	$db->conn->real_escape_string($this->Uur)."')";
-				print_r($sql);
 				return $db->conn->query($sql);
 
-			}
+				echo "$sql";
 
-			public function CheckDatum()
-			{
-				$db = new Database();
-				$sql = "select * from reservatie where Tafelnummer='" . $this->Tafelnummer . "' and Datum ='" . $this->Datum . "';";
-				return $db->conn->query($sql);
 			}
-
 
 			public function GetAll()
 			{
@@ -86,7 +83,7 @@ include_once ("db.class.php");
 				return $db->conn->query($sql);
 			}
 			
-	}
+		}
 ?>
 
 
