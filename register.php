@@ -1,12 +1,14 @@
 <?php 
 include_once("classes/User.class.php");
+include_once('classes/db.class.php');
+
 if (isset($_POST['btnSignup'])) {
 	try{
 	$user = new User();
-	$user -> Voornaam = $_POST['voornaam'];
-	$user -> Name = $_POST['naam'];
-	$user -> Email = $_POST['email'];
-	$user -> Password = $_POST['password'];
+	$user->Voornaam = $_POST['voornaam'];
+	$user->Name = $_POST['naam'];
+	$user->Email = $_POST['email'];
+	$user->Password = $_POST['password'];
 	$available = $user->EmailAvailable();
 		if($available == true){
 			$user -> Register();
