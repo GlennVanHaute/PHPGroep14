@@ -16,7 +16,7 @@
 
 <? session_start(); ?>
 
-<?php include('nav_include.php') ?>
+<?php include_once('nav_include.php') ?>
 <section id="wrapper">
 	<header>
 		<img src="images/logo.png" class="logo" alt="table4you"/>

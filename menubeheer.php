@@ -60,8 +60,9 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$("#nieuwMenu").on('keyup', function(){
+
 			var gerecht = $("#nieuwMenu").val();
-			//console.log(gerecht);
+			console.log(gerecht);
 
 			$.ajax
 				({
