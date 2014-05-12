@@ -174,7 +174,7 @@
 		}
 		else if(mysqli_num_rows($resultTafel) == 0)
 		{
-			echo "<p> Er is geen tafel vrij voor exact " . $Tafel->personen . " personen.
+			echo "<p> Er is geen tafel vrij voor exact " . $Tafel->personen . " personen</p>
 			Kijk hieronder voor andere reserveerbare tafels voor meer dan " . $Tafel->personen . " personen</p>";
 		}
 
@@ -190,10 +190,10 @@
 
 			foreach ($resultTafel as $tafel) 
 			{
-				echo "<label><input type='radio' name='restafel' value=".$tafel['Tafelnummer'].">";
+				echo "<label><h3><input type='radio' name='restafel' value=".$tafel['Tafelnummer'].">";
 					
-					echo " Tafel ".$tafel['Tafelnummer']."
-						 </label> <p>Tafel voor ".$tafel['MaxPersonen']." personen";
+					echo " Tafel ".$tafel['Tafelnummer']."</h3>
+						 </label> <p>Tafel voor ".$tafel['MaxPersonen']." personen</p>";
 
 					if(!empty($tafel['Opmerkingen']))
 					{
@@ -202,6 +202,7 @@
 
 				echo "<input type='hidden' name='resdatum'  value='" . $_POST['datum'] . "'/>";
 				echo "<input type='hidden' name='resuur' value='" . $_POST['uur'] . "'/>";
+				echo "<input type='hidden' name='resaantal' value='" . $_POST['aantal'] . "'/>";
 
 
 			}
@@ -220,18 +221,17 @@
 
 			foreach ($resultTafelHoger as $tafel) 
 			{
-				echo "<input type='radio' name='restafel' value=".$tafel['Tafelnummer'].">";
-
+					echo "<label><h3><input type='radio' name='restafel' value=".$tafel['Tafelnummer'].">";
 					
-					echo " Tafel ".$tafel['Tafelnummer']."
-						 <span> voor </span>".$tafel['MaxPersonen']." <span> personen.</span>";
+					echo " Tafel ".$tafel['Tafelnummer']."</h3>
+						 </label> <p>Tafel voor ".$tafel['MaxPersonen']." personen";
 
 					if(!empty($tafel['Opmerkingen']))
 					{
-						echo " Opmerkingen: " . $tafel['Opmerkingen'];
+						echo " <p>Opmerkingen: " . $tafel['Opmerkingen'] . "</p>";
 					};
 
-				echo "<input type='hidden' name='resdatum' value='" . $_POST['datum'] . "'/>";
+				echo "<input type='hidden' name='resdatum'  value='" . $_POST['datum'] . "'/>";
 				echo "<input type='hidden' name='resuur' value='" . $_POST['uur'] . "'/>";
 				echo "<input type='hidden' name='resaantal' value='" . $_POST['aantal'] . "'/>";
 
