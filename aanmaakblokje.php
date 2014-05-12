@@ -66,17 +66,18 @@
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/slicknav.css">
 	<title>Aanmaak restaurants</title>
 	
 	
 </head>
 <body>
-			
+			<?php include('nav_include.php') ?>
 			    <h2>Maak hier een restaurant aan</h2>
-<div class="container-fluid">
 
-	<div class="row">
-		<div class="col-xs-12 col-md-12">
+
+	<section id="wrapper">
+		<section class="blok">
 			<form role="form" action="" class="omkadering" method="post">
 			  <div class="form-group">
 				
@@ -91,9 +92,10 @@
 				
 			  </div>
 
-			  <button type="submit" class="btn btn-lg btn-default" id="button" value="post" name="btnRestAanmaken">Slaag je gegevens op</button>
+			  <button type="submit" class="btn btn-lg btn-default" id="button" value="post" name="btnRestAanmaken">Sla je gegevens op</button>
 			</form>
-			
+		</section>
+			<section class="blok">
 			<h1>Huidige resto's</h1>
 			<?php 
   		$res = $aanmaak->getAll();
@@ -128,8 +130,8 @@
 			echo "<label for='restobtw'>BTWnummer: </label>";
 			echo "<input type='text' name='restobtw' value='".$lijstrestos['BTWnummer']."'/>";
 			echo "</li>";
-			echo "<input type='submit' name='btn_edit' value='bewerken' />";
-			echo "<input type='submit' name='btn_delete' value='verwijderen' />";
+			echo "<input type='submit' class='btn btn-lg btn-default' name='btn_edit' value='bewerken' />";
+			echo "<input type='submit' class='btn btn-lg btn-default' name='btn_delete' value='verwijderen' />";
 
 			echo "</form>";
 		}
@@ -142,6 +144,7 @@
 	
 	
 	
-</div>
+	</section>
+</section>
 </body>
 </html>

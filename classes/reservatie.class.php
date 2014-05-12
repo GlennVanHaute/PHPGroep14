@@ -24,7 +24,6 @@ include_once ("db.class.php");
 						break;
 
 					case 'Datum':
-
 						$this->m_sDatum = $p_vValue;					
 						break;
 
@@ -98,7 +97,16 @@ include_once ("db.class.php");
 				$sql = "select * from reservatie order by Tafelnummer";
 				return $db->conn->query($sql);
 			}
-			
+
+			public function Delete()
+			{
+				$db = new Database();
+				$sql = "DELETE FROM reservatie
+						WHERE Tafelnummer = '".$this->Tafelnummer."'
+						";
+				return $db->conn->query($sql);
+			}
+					
 	}
 ?>
 
