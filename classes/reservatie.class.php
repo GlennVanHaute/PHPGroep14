@@ -5,6 +5,7 @@ include_once ("db.class.php");
 		class Reservatie
 		{
 			private $m_iTafelnummer;
+			private $m_iPersonen;
 			private $m_sDatum;
 			private $m_sUur;
 			
@@ -16,6 +17,10 @@ include_once ("db.class.php");
 				{
 					case 'Tafelnummer':
 						$this->m_iTafelnummer = $p_vValue;
+						break;
+
+					case 'Personen':
+						$this->m_iPersonen = $p_vValue;
 						break;
 
 					case 'Datum':
@@ -36,6 +41,10 @@ include_once ("db.class.php");
 				{
 					case 'Tafelnummer':
 						return $this->m_iTafelnummer;
+						break;
+
+					case 'Personen':
+						return $this->m_iPersonen;
 						break;
 
 					case 'Datum':
@@ -65,14 +74,14 @@ include_once ("db.class.php");
 				// echo "uur: $this->Uur  <br/>";
 
 				$db = new Database();
-				$sql = "INSERT INTO reservatie (Tafelnummer, Datum, Uur) 
+				$sql = "INSERT INTO reservatie (Tafelnummer, Personen, Datum, Uur) 
 				VALUES (
 			'".	$db->conn->real_escape_string($this->Tafelnummer)."',
+			'".	$db->conn->real_escape_string($this->Personen)."',
 			'".	$db->conn->real_escape_string($this->Datum)."',
 			'".	$db->conn->real_escape_string($this->Uur)."')";
+				print_r($sql);
 				return $db->conn->query($sql);
-
-				echo "$sql";
 
 			}
 

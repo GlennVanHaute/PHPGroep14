@@ -14,6 +14,7 @@
 		$aantal = $_POST['aantal'];
 		$Reservatie->Datum = $_POST['datum'];
 		$Reservatie->Uur = $_POST['uur'];
+		$Reservatie->Personen = $_POST['aantal'];
 			
 		$resultDatum = $Reservatie->CheckDatum();
 
@@ -28,6 +29,7 @@
 		$Reservatie->Tafelnummer = $_POST['restafel'];
 		$Reservatie->Datum = $_POST['resdatum'];
 		$Reservatie->Uur = $_POST['resuur'];
+		$Reservatie->Personen = $_POST['resaantal'];
 		$resultReservatie = $Reservatie->Reserveer();
 	}
 	
@@ -119,7 +121,7 @@
 <?php include_once('nav_include.php') ?>
 
 
-<h1>RESERVATIE</h1>
+<h1>RESERVATI</h1>
 <div class="container-fluid">
 
 <p>Kijk hier of er beschikbare tafels zijn:</p>
@@ -230,6 +232,7 @@
 
 				echo "<input type='hidden' name='resdatum' value='" . $_POST['datum'] . "'/>";
 				echo "<input type='hidden' name='resuur' value='" . $_POST['uur'] . "'/>";
+				echo "<input type='hidden' name='resaantal' value='" . $_POST['aantal'] . "'/>";
 				echo "</div>";
 				echo "</br>";
 
@@ -255,30 +258,6 @@
 
 <ul id='tafels'>
 
-<?php
-
-if (empty($_POST)) 
-{
-	$sql3 = "select * from tafelbeheer order by Tafelnummer";
-	echo"<h2>Alle tafels van dit restaurant</h2>";
-
-	$result3 = $db->conn->query($sql3);
-	foreach ($result3 as $tafel) 
-	{
-
-		echo "<li>";
-		echo"Tafelnummer: " . $tafel['Tafelnummer'] . "
-		Maximum aantal personen: " . $tafel['MaxPersonen'];
-		if(!empty($tafel['Opmerkingen']))
-		{
-			echo " Opmerkingen: " . $tafel['Opmerkingen'];
-		};
-
-
-		echo "</li>";
-	}
-}
-?> 
 </ul>
 
 <div id='resbevtitel'>
