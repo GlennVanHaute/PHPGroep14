@@ -12,14 +12,16 @@
 	if (!empty($_POST['submitknop'])) 
 	{
 		$aantal = $_POST['aantal'];
-		$datum = $_POST['datum'];
-		$startuur = $_POST['uur'];
+		$Reservatie->Datum = $_POST['datum'];
+		$Reservatie->Uur = $_POST['uur'];
+		$resultDatum = $Reservatie->CheckDatum();
 
 		$Tafel->personen = $_POST['aantal'];
 		$resultTafel = $Tafel->CheckAantal();
 
 		$Tafel->personen = $_POST['aantal'];
-		$resultTafelHoger = $Tafel->CheckAantalHoger($aantal);
+		$resultTafelHoger = $Tafel->CheckAantalHoger();
+		print_r($resultTafelHoger);
 
 	}
 	
@@ -31,8 +33,6 @@
 		$Reservatie->Uur = $_POST['resuur'];
 
 		$Reservatie->Reserveer();
-
-
 	}
 
 ?>
@@ -180,17 +180,23 @@
 		foreach ($resultTafel as $tafel) 
 		{
 			$resultDatum = $Reservatie->CheckDatum();
+			echo ($tafel);
 
 			if(mysqli_num_rows($resultDatum) == 0)
 			{
 				echo "<form method='post' action='' class='huidigeres'>";
-				echo" <span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
-					  Maximum aantal personen: " . $tafel['MaxPersonen'] . "
-					  Opmerkingen: " . $tafel['Opmerkingen'];
+				echo "<span> Tafel " . $tafel['Tafelnummer'] . "</span>
+					  Maximum aantal personen: " . $tafel['MaxPersonen'];
+					  
+				if(!empty($tafel['Opmerkingen']))
+				{
+					echo "Opmerkingen: " . $tafel['Opmerkingen'];
+				}
+					 
 				echo "</li>";
 				echo "<input type='hidden' name='restafel' value='" . $tafel["Tafelnummer"] . "'/>";
-				echo "<input type='hidden' name='resdatum' value='" . $datum . "'/>";
-				echo "<input type='hidden' name='resuur' value='" . $startuur . "'/>";
+				echo "<input type='hidden' name='resdatum' value='" . $Reservatie->Datum . "'/>";
+				echo "<input type='hidden' name='resuur' value='" . $Reservatie->Uur . "'/>";
 				echo"<INPUT type='submit' name='ressubmit' id='reserveerprint' value='Deze tafel reserveren'/>";
 				echo "</form>";
 				
@@ -198,17 +204,14 @@
 		}
 
 		
-		/* if(mysqli_num_rows($resultTafelHoger) != 0)
+		if(mysqli_num_rows($resultTafelHoger) !=0)
 		{
 			echo "<h2> Tafels die u ook kan reserveren:</h2>";
 
-			foreach ($resultTafel as $tafel) 
+			foreach ($resultTafelHoger as $tafel) 
+			
 			{
-				$resultDatum = $Reservatie->CheckDatum();
-
-				if(mysqli_num_rows($resultDatum) == 0)
-				{
-					$rtafel = $tafel['Tafelnummer'];
+				$rtafel = $tafel['Tafelnummer'];
 
 					echo "<form method='post' action='' class='huidigeres'>";
 				echo" <span> Tafelnummer: " . $tafel['Tafelnummer'] . "</span>
@@ -216,14 +219,14 @@
 					  Opmerkingen: " . $tafel['Opmerkingen'];
 				echo "</li>";
 				echo "<input type='hidden' name='restafel' value='" . $tafel['Tafelnummer'] . "'/>";
-				echo "<input type='hidden' name='resdatum' value='" . $datum . "'/>";
-				echo "<input type='hidden' name='resuur' value='" . $startuur . "'/>";
+				echo "<input type='hidden' name='resdatum' value='" . $Reservatie->Datum . "'/>";
+				echo "<input type='hidden' name='resuur' value='" . $Reservatie->Uur . "'/>";
 				echo"<INPUT type='submit' name='ressubmit' id='reserveerprint' value='Deze tafel reserveren'/>";
 				echo "</form>";
 					
-				}
 			}
-		} */
+			
+		}
 		
 	}
 	

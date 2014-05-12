@@ -113,6 +113,7 @@ class Tafel
 	{
 		$db = new Database();
 		$sql = "select * from tafelbeheer where MaxPersonen >'" . $this->personen . "' order by Tafelnummer;";
+		
 		return $db->conn->query($sql);
 	}
 
