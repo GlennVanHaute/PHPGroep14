@@ -14,7 +14,7 @@
 
 
 
-<? session_start(); ?>
+
 
 <?php include_once('nav_include.php') ?>
 <section id="wrapper">
@@ -36,7 +36,7 @@
 		<section id="contact">
 			<h2>CONTACT</h2>
 			<label>Adres:</label>
-			<p>Hoofdstraat 27</p>
+			<p>Oude Koornmarkt 2 - 2000 Antwerpen</p>
 			<label>Telefoon:</label>
 			<p>015/28 45 96</p>
 			<label>Email adres:</label>

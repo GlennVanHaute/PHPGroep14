@@ -53,7 +53,6 @@
 	
 	$(document).ready(function(){
 			$("#resbevtitel").hide();
-			console.log("document ready");
 			$(".huidigeres").submit(function(event){
 				var resultaat = $('#radio').is(':checked');
 
@@ -193,10 +192,6 @@
 			if(mysqli_num_rows($resultDatum) == 0)
 			{
 				echo "<form method='post' action='' class='huidigeres'>";
-
-			foreach ($resultTafel as $tafel) 
-			{
-
 				echo "<label><h3><input type='radio' id='radio' name='restafel' value=".$tafel['Tafelnummer'].">";
 					
 					echo " Tafel ".$tafel['Tafelnummer']."</h3>
@@ -214,7 +209,7 @@
 
 			}
 				
-			}
+	
 						
 		echo"<input type='submit' class='btn btn-lg btn-default'  name='ressubmit' id='reserveerprint' value='Deze tafel reserveren'/>";
 
